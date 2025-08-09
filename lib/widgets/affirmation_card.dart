@@ -3,9 +3,9 @@
 import 'package:flutter/material.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../providers/affirmation_provider.dart';
 import 'package:daily_affirmation/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import '../providers/affirmation_provider.dart';
 
 class AffirmationCard extends ConsumerWidget {
   final Affirmation affirmation;
@@ -242,10 +242,10 @@ class AffirmationCard extends ConsumerWidget {
     }
   }
 
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isFavorited = ref.watch(favoritesProvider).any((fav) => fav.affirmationIndex == affirmation.affirmationIndex);
-
     final String affirmationText = _getAffirmationText(context, affirmation.affirmationIndex);
 
     return Stack(
@@ -284,21 +284,6 @@ class AffirmationCard extends ConsumerWidget {
                 ],
               ),
             ),
-          ),
-        ),
-        // Favorite button
-        Positioned(
-          top: 20,
-          right: 20,
-          child: IconButton(
-            icon: Icon(
-              isFavorited ? Icons.star : Icons.favorite_border, // <-- The change is here
-              color: isFavorited ? Colors.yellow : Colors.white, // <-- The change is here
-              size: 36,
-            ),
-            onPressed: () {
-              ref.read(favoritesProvider.notifier).toggleFavorite(affirmation);
-            },
           ),
         ),
         // Photo Attribution Text

@@ -31,7 +31,7 @@ class DailyAffirmationApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Your Daily Affirmation',
+      title: 'Daily Affirmation',
       theme: ThemeData(
         brightness: Brightness.dark,
         primarySwatch: Colors.blue,
@@ -62,16 +62,32 @@ class AffirmationScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final affirmationState = ref.watch(affirmationProvider);
     final affirmationNotifier = ref.read(affirmationProvider.notifier);
-    
+
     const bool isMobile = !kIsWeb;
     final AppLocalizations localizations = AppLocalizations.of(context)!;
+
+    final bool isFavorited = affirmationState.value?.isFavorited ?? false;
 
     return Scaffold(
       appBar: AppBar(
         title: Text(localizations.appTitle),
         backgroundColor: Colors.transparent,
-        elevation: 0,
+        elevation: 10,
         actions: [
+          // Favorite button (to save/unsave current affirmation)
+          IconButton(
+            icon: Icon(
+              isFavorited ? Icons.thumb_up_alt : Icons.thumb_up_alt_outlined,
+              color: isFavorited ? Colors.yellow : Colors.white,
+            ),
+            onPressed: () {
+              if (affirmationState.hasValue) {
+                ref.read(favoritesProvider.notifier).toggleFavorite(affirmationState.value!.currentAffirmation);
+              }
+            },
+          ),
+          const SizedBox(width: 16), // Increased horizontal spacing
+          // Button to navigate to the favorites screen
           IconButton(
             icon: const Icon(Icons.favorite),
             onPressed: () {
@@ -100,7 +116,7 @@ class AffirmationScreen extends ConsumerWidget {
               ),
             ),
           Positioned(
-            bottom: isMobile ? 100 : 50,
+            bottom: isMobile ? 190 : 60, // Repositioned the button higher
             left: 0,
             right: 0,
             child: Center(
