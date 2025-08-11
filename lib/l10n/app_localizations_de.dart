@@ -396,4 +396,183 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get affirmation_106 => 'Ich bin ein Magnet für Segnungen.';
+
+  @override
+  String get settings => 'Einstellungen';
+
+  @override
+  String get notifications => 'Benachrichtigungen';
+
+  @override
+  String get dailyReminders => 'Tägliche Erinnerungen';
+
+  @override
+  String get enableNotifications =>
+      'Erhalten Sie Erinnerungen, um Ihre tägliche Affirmation zu lesen';
+
+  @override
+  String get disableNotifications =>
+      'Aktivieren Sie Benachrichtigungen, um tägliche Erinnerungen zu erhalten';
+
+  @override
+  String get reminderTime => 'Erinnerungszeit';
+
+  @override
+  String get changeTime => 'Ändern';
+
+  @override
+  String get offlineMode => 'Offline-Modus';
+
+  @override
+  String get offlineModeEnabled =>
+      'Nur zwischengespeicherte Affirmationen verwenden';
+
+  @override
+  String get offlineModeDisabled =>
+      'Neue Affirmationen aus dem Internet herunterladen';
+
+  @override
+  String get cacheStorage => 'Cache-Speicher';
+
+  @override
+  String get clearCache => 'Löschen';
+
+  @override
+  String get about => 'Über';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get totalAffirmations => 'Gesamte Affirmationen';
+
+  @override
+  String get languagesSupported => 'Unterstützte Sprachen';
+
+  @override
+  String get rateApp => 'App bewerten';
+
+  @override
+  String get rateAppDescription =>
+      'Helfen Sie uns zu verbessern, indem Sie die App bewerten';
+
+  @override
+  String get sendFeedback => 'Feedback senden';
+
+  @override
+  String get sendFeedbackDescription =>
+      'Teilen Sie Ihre Gedanken und Vorschläge mit';
+
+  @override
+  String get comingSoon => 'Demnächst';
+
+  @override
+  String get comingSoonDescription =>
+      'Diese Funktion wird in einem zukünftigen Update verfügbar sein!';
+
+  @override
+  String get clearCacheTitle => 'Cache löschen?';
+
+  @override
+  String get clearCacheDescription =>
+      'Dies entfernt alle zwischengespeicherten Affirmationen. Sie benötigen eine Internetverbindung, um neue zu laden.';
+
+  @override
+  String get cancel => 'Abbrechen';
+
+  @override
+  String get clear => 'Löschen';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get dayStreak => 'Tage-Serie';
+
+  @override
+  String get streakMessage0 => 'Beginnen Sie heute Ihre Reise! 🌟';
+
+  @override
+  String get streakMessage1 => 'Guter Start! Machen Sie weiter! 💪';
+
+  @override
+  String streakMessageLow(Object days) {
+    return 'Schwung aufbauen! $days Tage stark! 🔥';
+  }
+
+  @override
+  String streakMessageMedium(Object days) {
+    return 'Erstaunliche Serie! $days Tage Positivität! ⭐';
+  }
+
+  @override
+  String streakMessageHigh(Object days) {
+    return 'Unglaublich! $days Tage täglicher Affirmationen! 🏆';
+  }
+
+  @override
+  String get yourProgress => 'Ihr Fortschritt';
+
+  @override
+  String get currentStreak => 'Aktuelle Serie';
+
+  @override
+  String get longestStreak => 'Längste Serie';
+
+  @override
+  String get totalDays => 'Gesamte Tage';
+
+  @override
+  String get resetStreak => 'Serie zurücksetzen';
+
+  @override
+  String get resetStreakTitle => 'Serie zurücksetzen?';
+
+  @override
+  String get resetStreakDescription =>
+      'Sind Sie sicher, dass Sie Ihre aktuelle Serie zurücksetzen möchten? Diese Aktion kann nicht rückgängig gemacht werden.';
+
+  @override
+  String get reset => 'Zurücksetzen';
+
+  @override
+  String get close => 'Schließen';
+
+  @override
+  String unlimitedAffirmations(Object days) {
+    return '🎉 Unbegrenzte Affirmationen! ($days+ Tage Serie)';
+  }
+
+  @override
+  String affirmationsRemaining(Object count) {
+    return '$count Affirmationen heute übrig';
+  }
+
+  @override
+  String get dailyLimitReached =>
+      'Sie haben heute alle 20 Affirmationen verwendet! Bauen Sie eine 5-Tage-Serie für unbegrenzten Zugang auf';
+
+  @override
+  String get noSavedAffirmations => 'Noch keine gespeicherten Affirmationen.';
+
+  @override
+  String get noMatchingAffirmations =>
+      'Keine Affirmationen entsprechen Ihrer Suche.';
+
+  @override
+  String get searchFavorites => 'Durchsuchen Sie Ihre Favoriten...';
+
+  @override
+  String get savedFavorites => 'Gespeicherte Favoriten';
+
+  @override
+  String get noCachedAffirmations => 'Keine Affirmationen zwischengespeichert';
+
+  @override
+  String cacheStatus(Object count, Object max) {
+    return '$count/$max Affirmationen zwischengespeichert';
+  }
 }

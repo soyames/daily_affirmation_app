@@ -336,4 +336,172 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get affirmation_106 => '我是祝福的磁铁。';
+
+  @override
+  String get settings => '设置';
+
+  @override
+  String get notifications => '通知';
+
+  @override
+  String get dailyReminders => '每日提醒';
+
+  @override
+  String get enableNotifications => '获得提醒来阅读您的每日肯定';
+
+  @override
+  String get disableNotifications => '启用通知以获得每日提醒';
+
+  @override
+  String get reminderTime => '提醒时间';
+
+  @override
+  String get changeTime => '更改';
+
+  @override
+  String get offlineMode => '离线模式';
+
+  @override
+  String get offlineModeEnabled => '仅使用缓存的肯定';
+
+  @override
+  String get offlineModeDisabled => '从互联网下载新的肯定';
+
+  @override
+  String get cacheStorage => '缓存存储';
+
+  @override
+  String get clearCache => '清除';
+
+  @override
+  String get about => '关于';
+
+  @override
+  String get support => '支持';
+
+  @override
+  String get version => '版本';
+
+  @override
+  String get totalAffirmations => '肯定总数';
+
+  @override
+  String get languagesSupported => '支持的语言';
+
+  @override
+  String get rateApp => '评价应用';
+
+  @override
+  String get rateAppDescription => '通过评价应用帮助我们改进';
+
+  @override
+  String get sendFeedback => '发送反馈';
+
+  @override
+  String get sendFeedbackDescription => '分享您的想法和建议';
+
+  @override
+  String get comingSoon => '即将推出';
+
+  @override
+  String get comingSoonDescription => '此功能将在未来的更新中提供！';
+
+  @override
+  String get clearCacheTitle => '清除缓存？';
+
+  @override
+  String get clearCacheDescription => '这将删除所有缓存的肯定。您需要互联网连接来加载新的肯定。';
+
+  @override
+  String get cancel => '取消';
+
+  @override
+  String get clear => '清除';
+
+  @override
+  String get ok => '确定';
+
+  @override
+  String get dayStreak => '连续天数';
+
+  @override
+  String get streakMessage0 => '今天开始您的旅程！🌟';
+
+  @override
+  String get streakMessage1 => '很好的开始！继续保持！💪';
+
+  @override
+  String streakMessageLow(Object days) {
+    return '建立动力！$days天强劲！🔥';
+  }
+
+  @override
+  String streakMessageMedium(Object days) {
+    return '惊人的连续！$days天的积极性！⭐';
+  }
+
+  @override
+  String streakMessageHigh(Object days) {
+    return '不可思议！$days天的每日肯定！🏆';
+  }
+
+  @override
+  String get yourProgress => '您的进度';
+
+  @override
+  String get currentStreak => '当前连续';
+
+  @override
+  String get longestStreak => '最长连续';
+
+  @override
+  String get totalDays => '总天数';
+
+  @override
+  String get resetStreak => '重置连续';
+
+  @override
+  String get resetStreakTitle => '重置连续？';
+
+  @override
+  String get resetStreakDescription => '您确定要重置当前的连续记录吗？此操作无法撤销。';
+
+  @override
+  String get reset => '重置';
+
+  @override
+  String get close => '关闭';
+
+  @override
+  String unlimitedAffirmations(Object days) {
+    return '🎉 无限肯定！（$days+天连续）';
+  }
+
+  @override
+  String affirmationsRemaining(Object count) {
+    return '今天还剩$count个肯定';
+  }
+
+  @override
+  String get dailyLimitReached => '您今天已使用了20个肯定！建立5天连续以获得无限访问';
+
+  @override
+  String get noSavedAffirmations => '还没有保存的肯定。';
+
+  @override
+  String get noMatchingAffirmations => '没有肯定匹配您的搜索。';
+
+  @override
+  String get searchFavorites => '搜索您的收藏...';
+
+  @override
+  String get savedFavorites => '保存的收藏';
+
+  @override
+  String get noCachedAffirmations => '没有缓存的肯定';
+
+  @override
+  String cacheStatus(Object count, Object max) {
+    return '$count/$max个肯定已缓存';
+  }
 }

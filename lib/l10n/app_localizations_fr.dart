@@ -382,5 +382,184 @@ class AppLocalizationsFr extends AppLocalizations {
       'Je suis une force puissante et influente pour le bien.';
 
   @override
-  String get affirmation_106 => 'Je suis un imán para las bendiciones.';
+  String get affirmation_106 => 'Je suis un aimant pour les bénédictions.';
+
+  @override
+  String get settings => 'Paramètres';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get dailyReminders => 'Rappels Quotidiens';
+
+  @override
+  String get enableNotifications =>
+      'Recevez des rappels pour lire votre affirmation quotidienne';
+
+  @override
+  String get disableNotifications =>
+      'Activez les notifications pour recevoir des rappels quotidiens';
+
+  @override
+  String get reminderTime => 'Heure du Rappel';
+
+  @override
+  String get changeTime => 'Changer';
+
+  @override
+  String get offlineMode => 'Mode Hors Ligne';
+
+  @override
+  String get offlineModeEnabled =>
+      'Utilisation des affirmations mises en cache uniquement';
+
+  @override
+  String get offlineModeDisabled =>
+      'Télécharger de nouvelles affirmations depuis internet';
+
+  @override
+  String get cacheStorage => 'Stockage du Cache';
+
+  @override
+  String get clearCache => 'Effacer';
+
+  @override
+  String get about => 'À Propos';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get totalAffirmations => 'Total des Affirmations';
+
+  @override
+  String get languagesSupported => 'Langues Supportées';
+
+  @override
+  String get rateApp => 'Évaluer l\'App';
+
+  @override
+  String get rateAppDescription =>
+      'Aidez-nous à améliorer en évaluant l\'application';
+
+  @override
+  String get sendFeedback => 'Envoyer des Commentaires';
+
+  @override
+  String get sendFeedbackDescription => 'Partagez vos pensées et suggestions';
+
+  @override
+  String get comingSoon => 'Bientôt Disponible';
+
+  @override
+  String get comingSoonDescription =>
+      'Cette fonctionnalité sera disponible dans une future mise à jour !';
+
+  @override
+  String get clearCacheTitle => 'Effacer le Cache ?';
+
+  @override
+  String get clearCacheDescription =>
+      'Cela supprimera toutes les affirmations mises en cache. Vous aurez besoin d\'une connexion internet pour en charger de nouvelles.';
+
+  @override
+  String get cancel => 'Annuler';
+
+  @override
+  String get clear => 'Effacer';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get dayStreak => 'Série de Jours';
+
+  @override
+  String get streakMessage0 => 'Commencez votre voyage aujourd\'hui ! 🌟';
+
+  @override
+  String get streakMessage1 => 'Bon début ! Continuez ! 💪';
+
+  @override
+  String streakMessageLow(Object days) {
+    return 'Construire l\'élan ! $days jours fort ! 🔥';
+  }
+
+  @override
+  String streakMessageMedium(Object days) {
+    return 'Série incroyable ! $days jours de positivité ! ⭐';
+  }
+
+  @override
+  String streakMessageHigh(Object days) {
+    return 'Incroyable ! $days jours d\'affirmations quotidiennes ! 🏆';
+  }
+
+  @override
+  String get yourProgress => 'Votre Progrès';
+
+  @override
+  String get currentStreak => 'Série Actuelle';
+
+  @override
+  String get longestStreak => 'Plus Longue Série';
+
+  @override
+  String get totalDays => 'Jours Totaux';
+
+  @override
+  String get resetStreak => 'Réinitialiser la Série';
+
+  @override
+  String get resetStreakTitle => 'Réinitialiser la Série ?';
+
+  @override
+  String get resetStreakDescription =>
+      'Êtes-vous sûr de vouloir réinitialiser votre série actuelle ? Cette action ne peut pas être annulée.';
+
+  @override
+  String get reset => 'Réinitialiser';
+
+  @override
+  String get close => 'Fermer';
+
+  @override
+  String unlimitedAffirmations(Object days) {
+    return '🎉 Affirmations Illimitées ! (série de $days+ jours)';
+  }
+
+  @override
+  String affirmationsRemaining(Object count) {
+    return '$count affirmations restantes aujourd\'hui';
+  }
+
+  @override
+  String get dailyLimitReached =>
+      'Vous avez utilisé les 20 affirmations d\'aujourd\'hui ! Construisez une série de 5 jours pour un accès illimité';
+
+  @override
+  String get noSavedAffirmations =>
+      'Aucune affirmation sauvegardée pour le moment.';
+
+  @override
+  String get noMatchingAffirmations =>
+      'Aucune affirmation ne correspond à votre recherche.';
+
+  @override
+  String get searchFavorites => 'Recherchez dans vos favoris...';
+
+  @override
+  String get savedFavorites => 'Favoris sauvegardés';
+
+  @override
+  String get noCachedAffirmations => 'Aucune affirmation mise en cache';
+
+  @override
+  String cacheStatus(Object count, Object max) {
+    return '$count/$max affirmations mises en cache';
+  }
 }

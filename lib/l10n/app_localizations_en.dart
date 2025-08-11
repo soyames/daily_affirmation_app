@@ -359,4 +359,178 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get affirmation_106 => 'I am a magnet for blessings.';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get notifications => 'Notifications';
+
+  @override
+  String get dailyReminders => 'Daily Reminders';
+
+  @override
+  String get enableNotifications =>
+      'Get reminded to read your daily affirmation';
+
+  @override
+  String get disableNotifications =>
+      'Enable notifications to get daily reminders';
+
+  @override
+  String get reminderTime => 'Reminder Time';
+
+  @override
+  String get changeTime => 'Change';
+
+  @override
+  String get offlineMode => 'Offline Mode';
+
+  @override
+  String get offlineModeEnabled => 'Using cached affirmations only';
+
+  @override
+  String get offlineModeDisabled => 'Download new affirmations from internet';
+
+  @override
+  String get cacheStorage => 'Cache Storage';
+
+  @override
+  String get clearCache => 'Clear';
+
+  @override
+  String get about => 'About';
+
+  @override
+  String get support => 'Support';
+
+  @override
+  String get version => 'Version';
+
+  @override
+  String get totalAffirmations => 'Total Affirmations';
+
+  @override
+  String get languagesSupported => 'Languages Supported';
+
+  @override
+  String get rateApp => 'Rate the App';
+
+  @override
+  String get rateAppDescription => 'Help us improve by rating the app';
+
+  @override
+  String get sendFeedback => 'Send Feedback';
+
+  @override
+  String get sendFeedbackDescription => 'Share your thoughts and suggestions';
+
+  @override
+  String get comingSoon => 'Coming Soon';
+
+  @override
+  String get comingSoonDescription =>
+      'This feature will be available in a future update!';
+
+  @override
+  String get clearCacheTitle => 'Clear Cache?';
+
+  @override
+  String get clearCacheDescription =>
+      'This will remove all cached affirmations. You\'ll need an internet connection to load new ones.';
+
+  @override
+  String get cancel => 'Cancel';
+
+  @override
+  String get clear => 'Clear';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get dayStreak => 'Day Streak';
+
+  @override
+  String get streakMessage0 => 'Start your journey today! 🌟';
+
+  @override
+  String get streakMessage1 => 'Great start! Keep it up! 💪';
+
+  @override
+  String streakMessageLow(Object days) {
+    return 'Building momentum! $days days strong! 🔥';
+  }
+
+  @override
+  String streakMessageMedium(Object days) {
+    return 'Amazing streak! $days days of positivity! ⭐';
+  }
+
+  @override
+  String streakMessageHigh(Object days) {
+    return 'Incredible! $days days of daily affirmations! 🏆';
+  }
+
+  @override
+  String get yourProgress => 'Your Progress';
+
+  @override
+  String get currentStreak => 'Current Streak';
+
+  @override
+  String get longestStreak => 'Longest Streak';
+
+  @override
+  String get totalDays => 'Total Days';
+
+  @override
+  String get resetStreak => 'Reset Streak';
+
+  @override
+  String get resetStreakTitle => 'Reset Streak?';
+
+  @override
+  String get resetStreakDescription =>
+      'Are you sure you want to reset your current streak? This action cannot be undone.';
+
+  @override
+  String get reset => 'Reset';
+
+  @override
+  String get close => 'Close';
+
+  @override
+  String unlimitedAffirmations(Object days) {
+    return '🎉 Unlimited Affirmations! ($days+ day streak)';
+  }
+
+  @override
+  String affirmationsRemaining(Object count) {
+    return '$count affirmations remaining today';
+  }
+
+  @override
+  String get dailyLimitReached =>
+      'You\'ve used all 20 affirmations for today! Build a 5-day streak for unlimited access';
+
+  @override
+  String get noSavedAffirmations => 'No saved affirmations yet.';
+
+  @override
+  String get noMatchingAffirmations => 'No affirmations match your search.';
+
+  @override
+  String get searchFavorites => 'Search your favorites...';
+
+  @override
+  String get savedFavorites => 'Saved favorites';
+
+  @override
+  String get noCachedAffirmations => 'No affirmations cached';
+
+  @override
+  String cacheStatus(Object count, Object max) {
+    return '$count/$max affirmations cached';
+  }
 }

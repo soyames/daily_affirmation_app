@@ -7,8 +7,22 @@ import 'package:cached_network_image/cached_network_image.dart';
 import '../providers/affirmation_provider.dart';
 import 'package:daily_affirmation/l10n/app_localizations.dart';
 
-class FavoritesScreen extends ConsumerWidget {
+class FavoritesScreen extends ConsumerStatefulWidget {
   const FavoritesScreen({super.key});
+
+  @override
+  ConsumerState<FavoritesScreen> createState() => _FavoritesScreenState();
+}
+
+class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
+  final TextEditingController _searchController = TextEditingController();
+  String _searchQuery = '';
+
+  @override
+  void dispose() {
+    _searchController.dispose();
+    super.dispose();
+  }
 
   // A helper method to get the correct localized affirmation string
   String _getAffirmationText(BuildContext context, int index) {
@@ -232,29 +246,66 @@ class FavoritesScreen extends ConsumerWidget {
   }
 
   @override
-  Widget build(BuildContext context, WidgetRef ref) {
+  Widget build(BuildContext context) {
     // Watch the new favoritesProvider
     final favorites = ref.watch(favoritesProvider);
-    final AppLocalizations localizations = AppLocalizations.of(context)!;
+
+    // Filter favorites based on search query
+    final filteredFavorites = favorites.where((affirmation) {
+      if (_searchQuery.isEmpty) return true;
+      final affirmationText = _getAffirmationText(context, affirmation.affirmationIndex);
+      return affirmationText.toLowerCase().contains(_searchQuery.toLowerCase());
+    }).toList();
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Saved favorites'), 
+        title: const Text('Saved favorites'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
       extendBodyBehindAppBar: true,
-      body: favorites.isEmpty
-          ? Center(
-              child: Text(
-                'No saved affirmations yet.',
-                style: Theme.of(context).textTheme.titleLarge,
+      body: Column(
+        children: [
+          // Search bar
+          Container(
+            margin: const EdgeInsets.fromLTRB(16, 100, 16, 16),
+            decoration: BoxDecoration(
+              color: Colors.white.withValues(alpha: 0.1),
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+            ),
+            child: TextField(
+              controller: _searchController,
+              onChanged: (value) {
+                setState(() {
+                  _searchQuery = value;
+                });
+              },
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                hintText: 'Search your favorites...',
+                hintStyle: TextStyle(color: Colors.white70),
+                prefixIcon: Icon(Icons.search, color: Colors.white70),
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(16),
               ),
-            )
-          : ListView.builder(
-              itemCount: favorites.length,
-              itemBuilder: (context, index) {
-                final affirmation = favorites[index];
+            ),
+          ),
+          // Favorites list
+          Expanded(
+            child: filteredFavorites.isEmpty
+                ? Center(
+                    child: Text(
+                      _searchQuery.isEmpty
+                          ? 'No saved affirmations yet.'
+                          : 'No affirmations match your search.',
+                      style: Theme.of(context).textTheme.titleLarge?.copyWith(color: Colors.white),
+                    ),
+                  )
+                : ListView.builder(
+                    itemCount: filteredFavorites.length,
+                    itemBuilder: (context, index) {
+                      final affirmation = filteredFavorites[index];
                 final String affirmationText = _getAffirmationText(context, affirmation.affirmationIndex);
 
                 return Card(
@@ -272,7 +323,7 @@ class FavoritesScreen extends ConsumerWidget {
                       Container(
                         height: 200,
                         alignment: Alignment.center,
-                        color: Colors.black.withOpacity(0.4),
+                        color: Colors.black.withValues(alpha: 0.4),
                         child: Padding(
                           padding: const EdgeInsets.all(16.0),
                           child: Text(
@@ -295,7 +346,7 @@ class FavoritesScreen extends ConsumerWidget {
                             IconButton(
                               icon: const Icon(Icons.share, color: Colors.white),
                               onPressed: () {
-                                Share.share('$affirmationText\n\nImage from: ${affirmation.imageUrl}');
+                                SharePlus.instance.share(ShareParams(text: '$affirmationText\n\nImage from: ${affirmation.imageUrl}'));
                               },
                             ),
                             IconButton(
@@ -310,9 +361,12 @@ class FavoritesScreen extends ConsumerWidget {
                       ),
                     ],
                   ),
-                );
-              },
-            ),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
     );
   }
 }

@@ -759,6 +759,318 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I am a magnet for blessings.'**
   String get affirmation_106;
+
+  /// No description provided for @settings.
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// No description provided for @notifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Notifications'**
+  String get notifications;
+
+  /// No description provided for @dailyReminders.
+  ///
+  /// In en, this message translates to:
+  /// **'Daily Reminders'**
+  String get dailyReminders;
+
+  /// No description provided for @enableNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Get reminded to read your daily affirmation'**
+  String get enableNotifications;
+
+  /// No description provided for @disableNotifications.
+  ///
+  /// In en, this message translates to:
+  /// **'Enable notifications to get daily reminders'**
+  String get disableNotifications;
+
+  /// No description provided for @reminderTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Reminder Time'**
+  String get reminderTime;
+
+  /// No description provided for @changeTime.
+  ///
+  /// In en, this message translates to:
+  /// **'Change'**
+  String get changeTime;
+
+  /// No description provided for @offlineMode.
+  ///
+  /// In en, this message translates to:
+  /// **'Offline Mode'**
+  String get offlineMode;
+
+  /// No description provided for @offlineModeEnabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Using cached affirmations only'**
+  String get offlineModeEnabled;
+
+  /// No description provided for @offlineModeDisabled.
+  ///
+  /// In en, this message translates to:
+  /// **'Download new affirmations from internet'**
+  String get offlineModeDisabled;
+
+  /// No description provided for @cacheStorage.
+  ///
+  /// In en, this message translates to:
+  /// **'Cache Storage'**
+  String get cacheStorage;
+
+  /// No description provided for @clearCache.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clearCache;
+
+  /// No description provided for @about.
+  ///
+  /// In en, this message translates to:
+  /// **'About'**
+  String get about;
+
+  /// No description provided for @support.
+  ///
+  /// In en, this message translates to:
+  /// **'Support'**
+  String get support;
+
+  /// No description provided for @version.
+  ///
+  /// In en, this message translates to:
+  /// **'Version'**
+  String get version;
+
+  /// No description provided for @totalAffirmations.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Affirmations'**
+  String get totalAffirmations;
+
+  /// No description provided for @languagesSupported.
+  ///
+  /// In en, this message translates to:
+  /// **'Languages Supported'**
+  String get languagesSupported;
+
+  /// No description provided for @rateApp.
+  ///
+  /// In en, this message translates to:
+  /// **'Rate the App'**
+  String get rateApp;
+
+  /// No description provided for @rateAppDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Help us improve by rating the app'**
+  String get rateAppDescription;
+
+  /// No description provided for @sendFeedback.
+  ///
+  /// In en, this message translates to:
+  /// **'Send Feedback'**
+  String get sendFeedback;
+
+  /// No description provided for @sendFeedbackDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Share your thoughts and suggestions'**
+  String get sendFeedbackDescription;
+
+  /// No description provided for @comingSoon.
+  ///
+  /// In en, this message translates to:
+  /// **'Coming Soon'**
+  String get comingSoon;
+
+  /// No description provided for @comingSoonDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This feature will be available in a future update!'**
+  String get comingSoonDescription;
+
+  /// No description provided for @clearCacheTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear Cache?'**
+  String get clearCacheTitle;
+
+  /// No description provided for @clearCacheDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'This will remove all cached affirmations. You\'ll need an internet connection to load new ones.'**
+  String get clearCacheDescription;
+
+  /// No description provided for @cancel.
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// No description provided for @clear.
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get clear;
+
+  /// No description provided for @ok.
+  ///
+  /// In en, this message translates to:
+  /// **'OK'**
+  String get ok;
+
+  /// No description provided for @dayStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Day Streak'**
+  String get dayStreak;
+
+  /// No description provided for @streakMessage0.
+  ///
+  /// In en, this message translates to:
+  /// **'Start your journey today! 🌟'**
+  String get streakMessage0;
+
+  /// No description provided for @streakMessage1.
+  ///
+  /// In en, this message translates to:
+  /// **'Great start! Keep it up! 💪'**
+  String get streakMessage1;
+
+  /// No description provided for @streakMessageLow.
+  ///
+  /// In en, this message translates to:
+  /// **'Building momentum! {days} days strong! 🔥'**
+  String streakMessageLow(Object days);
+
+  /// No description provided for @streakMessageMedium.
+  ///
+  /// In en, this message translates to:
+  /// **'Amazing streak! {days} days of positivity! ⭐'**
+  String streakMessageMedium(Object days);
+
+  /// No description provided for @streakMessageHigh.
+  ///
+  /// In en, this message translates to:
+  /// **'Incredible! {days} days of daily affirmations! 🏆'**
+  String streakMessageHigh(Object days);
+
+  /// No description provided for @yourProgress.
+  ///
+  /// In en, this message translates to:
+  /// **'Your Progress'**
+  String get yourProgress;
+
+  /// No description provided for @currentStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Current Streak'**
+  String get currentStreak;
+
+  /// No description provided for @longestStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Longest Streak'**
+  String get longestStreak;
+
+  /// No description provided for @totalDays.
+  ///
+  /// In en, this message translates to:
+  /// **'Total Days'**
+  String get totalDays;
+
+  /// No description provided for @resetStreak.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Streak'**
+  String get resetStreak;
+
+  /// No description provided for @resetStreakTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset Streak?'**
+  String get resetStreakTitle;
+
+  /// No description provided for @resetStreakDescription.
+  ///
+  /// In en, this message translates to:
+  /// **'Are you sure you want to reset your current streak? This action cannot be undone.'**
+  String get resetStreakDescription;
+
+  /// No description provided for @reset.
+  ///
+  /// In en, this message translates to:
+  /// **'Reset'**
+  String get reset;
+
+  /// No description provided for @close.
+  ///
+  /// In en, this message translates to:
+  /// **'Close'**
+  String get close;
+
+  /// No description provided for @unlimitedAffirmations.
+  ///
+  /// In en, this message translates to:
+  /// **'🎉 Unlimited Affirmations! ({days}+ day streak)'**
+  String unlimitedAffirmations(Object days);
+
+  /// No description provided for @affirmationsRemaining.
+  ///
+  /// In en, this message translates to:
+  /// **'{count} affirmations remaining today'**
+  String affirmationsRemaining(Object count);
+
+  /// No description provided for @dailyLimitReached.
+  ///
+  /// In en, this message translates to:
+  /// **'You\'ve used all 20 affirmations for today! Build a 5-day streak for unlimited access'**
+  String get dailyLimitReached;
+
+  /// No description provided for @noSavedAffirmations.
+  ///
+  /// In en, this message translates to:
+  /// **'No saved affirmations yet.'**
+  String get noSavedAffirmations;
+
+  /// No description provided for @noMatchingAffirmations.
+  ///
+  /// In en, this message translates to:
+  /// **'No affirmations match your search.'**
+  String get noMatchingAffirmations;
+
+  /// No description provided for @searchFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Search your favorites...'**
+  String get searchFavorites;
+
+  /// No description provided for @savedFavorites.
+  ///
+  /// In en, this message translates to:
+  /// **'Saved favorites'**
+  String get savedFavorites;
+
+  /// No description provided for @noCachedAffirmations.
+  ///
+  /// In en, this message translates to:
+  /// **'No affirmations cached'**
+  String get noCachedAffirmations;
+
+  /// No description provided for @cacheStatus.
+  ///
+  /// In en, this message translates to:
+  /// **'{count}/{max} affirmations cached'**
+  String cacheStatus(Object count, Object max);
 }
 
 class _AppLocalizationsDelegate

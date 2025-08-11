@@ -6,6 +6,8 @@ import 'dart:convert';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'dart:math';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'offline_provider.dart';
+import 'streak_provider.dart';
 
 // Affirmation Data Model
 class Affirmation {
@@ -94,7 +96,21 @@ class AffirmationNotifier extends StateNotifier<AsyncValue<AffirmationState>> {
     state = const AsyncValue.loading();
     try {
       final favoritesList = ref.read(favoritesProvider);
-      
+      final offlineCache = ref.read(offlineCacheProvider);
+
+      // Check if offline mode is enabled and we have cached affirmations
+      if (offlineCache.isOfflineMode && offlineCache.cachedAffirmations.isNotEmpty) {
+        final cachedAffirmation = ref.read(offlineCacheProvider.notifier).getRandomCachedAffirmation();
+        if (cachedAffirmation != null) {
+          final isFavorited = favoritesList.any((fav) => fav.affirmationIndex == cachedAffirmation.affirmationIndex);
+          state = AsyncValue.data(AffirmationState(
+            currentAffirmation: cachedAffirmation,
+            isFavorited: isFavorited,
+          ));
+          return;
+        }
+      }
+
       final randomAffirmationIndex = Random().nextInt(numberOfAffirmations) + 1;
       
       final apiKey = dotenv.env['UNSPLASH_ACCESS_KEY'];
@@ -123,6 +139,12 @@ class AffirmationNotifier extends StateNotifier<AsyncValue<AffirmationState>> {
           currentAffirmation: newAffirmation,
           isFavorited: isFavorited,
         ));
+
+        // Cache the affirmation for offline use
+        ref.read(offlineCacheProvider.notifier).cacheAffirmation(newAffirmation);
+
+        // Record affirmation usage for daily limits
+        ref.read(streakProvider.notifier).recordAffirmationUsage();
       } else {
         throw Exception('Failed to load image from Unsplash. Status code: ${response.statusCode}');
       }

@@ -338,4 +338,176 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get affirmation_106 => 'أنا مغناطيس للبركات.';
+
+  @override
+  String get settings => 'الإعدادات';
+
+  @override
+  String get notifications => 'الإشعارات';
+
+  @override
+  String get dailyReminders => 'التذكيرات اليومية';
+
+  @override
+  String get enableNotifications => 'احصل على تذكيرات لقراءة تأكيدك اليومي';
+
+  @override
+  String get disableNotifications => 'فعّل الإشعارات للحصول على تذكيرات يومية';
+
+  @override
+  String get reminderTime => 'وقت التذكير';
+
+  @override
+  String get changeTime => 'تغيير';
+
+  @override
+  String get offlineMode => 'الوضع غير المتصل';
+
+  @override
+  String get offlineModeEnabled => 'استخدام التأكيدات المحفوظة فقط';
+
+  @override
+  String get offlineModeDisabled => 'تحميل تأكيدات جديدة من الإنترنت';
+
+  @override
+  String get cacheStorage => 'تخزين التخزين المؤقت';
+
+  @override
+  String get clearCache => 'مسح';
+
+  @override
+  String get about => 'حول';
+
+  @override
+  String get support => 'الدعم';
+
+  @override
+  String get version => 'الإصدار';
+
+  @override
+  String get totalAffirmations => 'إجمالي التأكيدات';
+
+  @override
+  String get languagesSupported => 'اللغات المدعومة';
+
+  @override
+  String get rateApp => 'قيّم التطبيق';
+
+  @override
+  String get rateAppDescription => 'ساعدنا في التحسين من خلال تقييم التطبيق';
+
+  @override
+  String get sendFeedback => 'إرسال ملاحظات';
+
+  @override
+  String get sendFeedbackDescription => 'شارك أفكارك واقتراحاتك';
+
+  @override
+  String get comingSoon => 'قريباً';
+
+  @override
+  String get comingSoonDescription =>
+      'ستكون هذه الميزة متاحة في تحديث مستقبلي!';
+
+  @override
+  String get clearCacheTitle => 'مسح التخزين المؤقت؟';
+
+  @override
+  String get clearCacheDescription =>
+      'سيؤدي هذا إلى إزالة جميع التأكيدات المحفوظة. ستحتاج إلى اتصال بالإنترنت لتحميل تأكيدات جديدة.';
+
+  @override
+  String get cancel => 'إلغاء';
+
+  @override
+  String get clear => 'مسح';
+
+  @override
+  String get ok => 'موافق';
+
+  @override
+  String get dayStreak => 'سلسلة الأيام';
+
+  @override
+  String get streakMessage0 => 'ابدأ رحلتك اليوم! 🌟';
+
+  @override
+  String get streakMessage1 => 'بداية رائعة! استمر! 💪';
+
+  @override
+  String streakMessageLow(Object days) {
+    return 'بناء الزخم! $days أيام قوية! 🔥';
+  }
+
+  @override
+  String streakMessageMedium(Object days) {
+    return 'سلسلة مذهلة! $days أيام من الإيجابية! ⭐';
+  }
+
+  @override
+  String streakMessageHigh(Object days) {
+    return 'لا يصدق! $days أيام من التأكيدات اليومية! 🏆';
+  }
+
+  @override
+  String get yourProgress => 'تقدمك';
+
+  @override
+  String get currentStreak => 'السلسلة الحالية';
+
+  @override
+  String get longestStreak => 'أطول سلسلة';
+
+  @override
+  String get totalDays => 'إجمالي الأيام';
+
+  @override
+  String get resetStreak => 'إعادة تعيين السلسلة';
+
+  @override
+  String get resetStreakTitle => 'إعادة تعيين السلسلة؟';
+
+  @override
+  String get resetStreakDescription =>
+      'هل أنت متأكد من أنك تريد إعادة تعيين سلسلتك الحالية؟ لا يمكن التراجع عن هذا الإجراء.';
+
+  @override
+  String get reset => 'إعادة تعيين';
+
+  @override
+  String get close => 'إغلاق';
+
+  @override
+  String unlimitedAffirmations(Object days) {
+    return '🎉 تأكيدات غير محدودة! (سلسلة $days+ أيام)';
+  }
+
+  @override
+  String affirmationsRemaining(Object count) {
+    return '$count تأكيدات متبقية اليوم';
+  }
+
+  @override
+  String get dailyLimitReached =>
+      'لقد استخدمت 20 تأكيداً اليوم! ابنِ سلسلة 5 أيام للوصول غير المحدود';
+
+  @override
+  String get noSavedAffirmations => 'لا توجد تأكيدات محفوظة بعد.';
+
+  @override
+  String get noMatchingAffirmations => 'لا توجد تأكيدات تطابق بحثك.';
+
+  @override
+  String get searchFavorites => 'ابحث في مفضلاتك...';
+
+  @override
+  String get savedFavorites => 'المفضلات المحفوظة';
+
+  @override
+  String get noCachedAffirmations => 'لا توجد تأكيدات محفوظة';
+
+  @override
+  String cacheStatus(Object count, Object max) {
+    return '$count/$max تأكيدات محفوظة';
+  }
 }

@@ -261,7 +261,7 @@ class AffirmationCard extends ConsumerWidget {
         ),
         // Dark overlay for text readability
         Container(
-          color: Colors.black.withOpacity(0.4),
+          color: Colors.black.withValues(alpha: 0.4),
         ),
         // Affirmation Text
         Center(

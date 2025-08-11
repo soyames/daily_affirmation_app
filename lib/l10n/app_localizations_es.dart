@@ -367,4 +367,181 @@ class AppLocalizationsEs extends AppLocalizations {
 
   @override
   String get affirmation_106 => 'Soy un imán para las bendiciones.';
+
+  @override
+  String get settings => 'Configuración';
+
+  @override
+  String get notifications => 'Notificaciones';
+
+  @override
+  String get dailyReminders => 'Recordatorios Diarios';
+
+  @override
+  String get enableNotifications =>
+      'Recibe recordatorios para leer tu afirmación diaria';
+
+  @override
+  String get disableNotifications =>
+      'Habilita las notificaciones para recibir recordatorios diarios';
+
+  @override
+  String get reminderTime => 'Hora del Recordatorio';
+
+  @override
+  String get changeTime => 'Cambiar';
+
+  @override
+  String get offlineMode => 'Modo Sin Conexión';
+
+  @override
+  String get offlineModeEnabled => 'Usando solo afirmaciones almacenadas';
+
+  @override
+  String get offlineModeDisabled => 'Descargar nuevas afirmaciones de internet';
+
+  @override
+  String get cacheStorage => 'Almacenamiento de Caché';
+
+  @override
+  String get clearCache => 'Limpiar';
+
+  @override
+  String get about => 'Acerca de';
+
+  @override
+  String get support => 'Soporte';
+
+  @override
+  String get version => 'Versión';
+
+  @override
+  String get totalAffirmations => 'Total de Afirmaciones';
+
+  @override
+  String get languagesSupported => 'Idiomas Soportados';
+
+  @override
+  String get rateApp => 'Calificar la App';
+
+  @override
+  String get rateAppDescription =>
+      'Ayúdanos a mejorar calificando la aplicación';
+
+  @override
+  String get sendFeedback => 'Enviar Comentarios';
+
+  @override
+  String get sendFeedbackDescription =>
+      'Comparte tus pensamientos y sugerencias';
+
+  @override
+  String get comingSoon => 'Próximamente';
+
+  @override
+  String get comingSoonDescription =>
+      '¡Esta función estará disponible en una futura actualización!';
+
+  @override
+  String get clearCacheTitle => '¿Limpiar Caché?';
+
+  @override
+  String get clearCacheDescription =>
+      'Esto eliminará todas las afirmaciones almacenadas. Necesitarás una conexión a internet para cargar nuevas.';
+
+  @override
+  String get cancel => 'Cancelar';
+
+  @override
+  String get clear => 'Limpiar';
+
+  @override
+  String get ok => 'OK';
+
+  @override
+  String get dayStreak => 'Racha de Días';
+
+  @override
+  String get streakMessage0 => '¡Comienza tu viaje hoy! 🌟';
+
+  @override
+  String get streakMessage1 => '¡Buen comienzo! ¡Sigue así! 💪';
+
+  @override
+  String streakMessageLow(Object days) {
+    return '¡Construyendo impulso! ¡$days días fuerte! 🔥';
+  }
+
+  @override
+  String streakMessageMedium(Object days) {
+    return '¡Racha increíble! ¡$days días de positividad! ⭐';
+  }
+
+  @override
+  String streakMessageHigh(Object days) {
+    return '¡Increíble! ¡$days días de afirmaciones diarias! 🏆';
+  }
+
+  @override
+  String get yourProgress => 'Tu Progreso';
+
+  @override
+  String get currentStreak => 'Racha Actual';
+
+  @override
+  String get longestStreak => 'Racha Más Larga';
+
+  @override
+  String get totalDays => 'Días Totales';
+
+  @override
+  String get resetStreak => 'Reiniciar Racha';
+
+  @override
+  String get resetStreakTitle => '¿Reiniciar Racha?';
+
+  @override
+  String get resetStreakDescription =>
+      '¿Estás seguro de que quieres reiniciar tu racha actual? Esta acción no se puede deshacer.';
+
+  @override
+  String get reset => 'Reiniciar';
+
+  @override
+  String get close => 'Cerrar';
+
+  @override
+  String unlimitedAffirmations(Object days) {
+    return '🎉 ¡Afirmaciones Ilimitadas! (racha de $days+ días)';
+  }
+
+  @override
+  String affirmationsRemaining(Object count) {
+    return '$count afirmaciones restantes hoy';
+  }
+
+  @override
+  String get dailyLimitReached =>
+      '¡Has usado las 20 afirmaciones de hoy! Construye una racha de 5 días para acceso ilimitado';
+
+  @override
+  String get noSavedAffirmations => 'Aún no hay afirmaciones guardadas.';
+
+  @override
+  String get noMatchingAffirmations =>
+      'Ninguna afirmación coincide con tu búsqueda.';
+
+  @override
+  String get searchFavorites => 'Busca en tus favoritos...';
+
+  @override
+  String get savedFavorites => 'Favoritos guardados';
+
+  @override
+  String get noCachedAffirmations => 'No hay afirmaciones almacenadas';
+
+  @override
+  String cacheStatus(Object count, Object max) {
+    return '$count/$max afirmaciones almacenadas';
+  }
 }
