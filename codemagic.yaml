@@ -1,6 +1,6 @@
 workflows:
-  ios-workflow:
-    name: iOS Workflow
+  ios-shorebird-workflow:
+    name: iOS Shorebird Release
     max_build_duration: 120
     instance_type: mac_mini_m1
     integrations:
@@ -16,7 +16,8 @@ workflows:
         APP_STORE_APPLE_ID: 1234567890 # Replace with your actual App Store ID
         APP_NAME: "Daily Affirmation"
         TEAM_ID: "YOUR_TEAM_ID" # Replace with your Apple Developer Team ID
-      flutter: stable
+        SHOREBIRD_TOKEN: $SHOREBIRD_TOKEN # Add your Shorebird token as environment variable
+      flutter: shorebird
       xcode: latest
       cocoapods: default
     scripts:
@@ -48,9 +49,12 @@ workflows:
         script: |
           flutter test
         ignore_failure: true
-      - name: Build ipa for distribution
+      - name: Initialize Shorebird
         script: |
-          flutter build ipa --release \
+          shorebird login --token $SHOREBIRD_TOKEN
+      - name: Build Shorebird release
+        script: |
+          shorebird release ios --target release \
             --build-name=1.1.0 \
             --build-number=$(($(google-play get-latest-build-number --package-name "$BUNDLE_ID") + 1))
     artifacts:
