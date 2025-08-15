@@ -5,6 +5,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 
 // Localization imports
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -19,14 +21,37 @@ import 'ad_helper.dart';
 import 'widgets/favorites_screen.dart';
 import 'widgets/settings_screen.dart';
 import 'widgets/streak_widget.dart';
+import 'widgets/pwa_install_button.dart';
+import 'services/analytics_service.dart';
+import 'services/pwa_service.dart';
+import 'services/web_notification_service.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Firebase
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
+  // Initialize Analytics
+  await AnalyticsService.initialize();
+
   await dotenv.load(fileName: ".env");
   if (!kIsWeb) {
     MobileAds.instance.initialize();
     await NotificationService.initialize();
+  } else {
+    // Track web access for Firebase hosting
+    await AnalyticsService.trackWebAccess();
+
+    // Initialize PWA functionality
+    PWAService.initialize();
+
+    // Initialize web notifications
+    await WebNotificationService.initialize();
   }
+
   runApp(const ProviderScope(child: DailyAffirmationApp()));
 }
 
@@ -42,6 +67,9 @@ class DailyAffirmationApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
+      navigatorObservers: [
+        AnalyticsService.observer,
+      ],
       home: const AffirmationScreen(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -71,6 +99,7 @@ class AffirmationScreen extends ConsumerWidget {
     // Record visit for streak tracking
     WidgetsBinding.instance.addPostFrameCallback((_) {
       ref.read(streakProvider.notifier).recordVisit();
+      _checkNotificationPrompt(context, ref);
     });
 
     final screenSize = MediaQuery.of(context).size;
@@ -111,11 +140,33 @@ class AffirmationScreen extends ConsumerWidget {
               Navigator.of(context).push(MaterialPageRoute(builder: (context) => const FavoritesScreen()));
             },
           ),
-          // Settings button
-          IconButton(
-            icon: const Icon(Icons.settings),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
+          // Settings button with notification indicator
+          Consumer(
+            builder: (context, ref, child) {
+              final notificationSettings = ref.watch(notificationSettingsProvider);
+              return Stack(
+                children: [
+                  IconButton(
+                    icon: const Icon(Icons.settings),
+                    onPressed: () {
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
+                    },
+                  ),
+                  if (!notificationSettings.enabled)
+                    Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        width: 8,
+                        height: 8,
+                        decoration: const BoxDecoration(
+                          color: Colors.orange,
+                          shape: BoxShape.circle,
+                        ),
+                      ),
+                    ),
+                ],
+              );
             },
           ),
         ],
@@ -146,6 +197,13 @@ class AffirmationScreen extends ConsumerWidget {
             child: const StreakWidget(),
           ),
 
+          // PWA Install Button (only shows on web when installable)
+          const Positioned(
+            top: 100,
+            right: 16,
+            child: PWAInstallButton(),
+          ),
+
           Positioned(
             bottom: buttonBottomPosition, // Responsive button positioning
             left: 0,
@@ -158,7 +216,8 @@ class AffirmationScreen extends ConsumerWidget {
 
                   return ElevatedButton(
                     onPressed: canGenerate ? () {
-                      affirmationNotifier.getNewAffirmation();
+                      // Force refresh and get new affirmation
+                      affirmationNotifier.forceRefresh();
                     } : () {
                       _showDailyLimitDialog(context, ref);
                     },
@@ -336,6 +395,74 @@ class AffirmationScreen extends ConsumerWidget {
               ],
             ),
           ),
+        );
+      },
+    );
+  }
+
+  void _checkNotificationPrompt(BuildContext context, WidgetRef ref) async {
+    final notificationSettings = ref.read(notificationSettingsProvider);
+    final promptNotifier = ref.read(notificationPromptProvider.notifier);
+    final streakData = ref.read(streakProvider);
+
+    // Show prompt if:
+    // 1. Notifications are not enabled
+    // 2. User hasn't been prompted before
+    // 3. User has used the app at least 2 times (has some streak data)
+    if (!notificationSettings.enabled &&
+        !promptNotifier.hasBeenShown &&
+        streakData.totalDays >= 2) {
+
+      // Wait a bit before showing the prompt
+      await Future.delayed(const Duration(seconds: 3));
+      if (context.mounted) {
+        _showNotificationPrompt(context, ref);
+        promptNotifier.markPromptShown();
+      }
+    }
+  }
+
+  void _showNotificationPrompt(BuildContext context, WidgetRef ref) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: const Color(0xFF1a1a2e),
+          title: const Row(
+            children: [
+              Icon(Icons.notifications_active, color: Colors.orange, size: 28),
+              SizedBox(width: 12),
+              Text(
+                'Daily Reminders',
+                style: TextStyle(color: Colors.white),
+              ),
+            ],
+          ),
+          content: const Text(
+            'Would you like to receive daily reminders to read your affirmations? You can customize the time in settings.',
+            style: TextStyle(color: Colors.white70),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.of(context).pop(),
+              child: const Text(
+                'Maybe Later',
+                style: TextStyle(color: Colors.grey),
+              ),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const SettingsScreen())
+                );
+              },
+              child: const Text(
+                'Set Up Notifications',
+                style: TextStyle(color: Colors.orange),
+              ),
+            ),
+          ],
         );
       },
     );

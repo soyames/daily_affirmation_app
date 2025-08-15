@@ -3,6 +3,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:daily_affirmation/l10n/app_localizations.dart';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:in_app_review/in_app_review.dart';
+import 'package:mailto/mailto.dart';
+import 'package:flutter/foundation.dart';
 import '../providers/notification_provider.dart';
 import '../providers/offline_provider.dart';
 
@@ -88,21 +92,26 @@ class SettingsScreen extends ConsumerWidget {
               
               _buildInfoTile(
                 'Version',
-                '1.1.0',
+                '1.2.0',
                 Icons.code,
               ),
-              
+
               _buildInfoTile(
                 'Total Affirmations',
                 '106',
                 Icons.format_quote,
               ),
-              
+
               _buildInfoTile(
                 'Languages Supported',
                 '6',
                 Icons.language,
               ),
+
+              const SizedBox(height: 16),
+
+              // Developer Information
+              _buildDeveloperTile(),
               
               const SizedBox(height: 32),
               
@@ -114,14 +123,14 @@ class SettingsScreen extends ConsumerWidget {
                 'Rate the App',
                 'Help us improve by rating the app',
                 Icons.star,
-                () => _showComingSoonDialog(context),
+                () => _rateApp(context),
               ),
-              
+
               _buildActionTile(
                 'Send Feedback',
                 'Share your thoughts and suggestions',
                 Icons.feedback,
-                () => _showComingSoonDialog(context),
+                () => _sendFeedback(context),
               ),
             ],
           ),
@@ -310,7 +319,38 @@ class SettingsScreen extends ConsumerWidget {
           ),
           Switch(
             value: settings.enabled,
-            onChanged: (_) => notifier.toggleNotifications(),
+            onChanged: (value) async {
+              // Show immediate feedback
+              ScaffoldMessenger.of(context).showSnackBar(
+                SnackBar(
+                  content: Text(value ? 'Enabling notifications...' : 'Disabling notifications...'),
+                  duration: const Duration(seconds: 1),
+                ),
+              );
+
+              try {
+                await notifier.toggleNotifications();
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(value ? 'Notifications enabled!' : 'Notifications disabled!'),
+                      duration: const Duration(seconds: 2),
+                      backgroundColor: Colors.green,
+                    ),
+                  );
+                }
+              } catch (e) {
+                if (context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text('Failed to update notifications: $e'),
+                      duration: const Duration(seconds: 3),
+                      backgroundColor: Colors.red,
+                    ),
+                  );
+                }
+              }
+            },
             activeColor: Colors.green,
           ),
         ],
@@ -512,18 +552,168 @@ class SettingsScreen extends ConsumerWidget {
     }
   }
 
-  void _showComingSoonDialog(BuildContext context) {
+  Widget _buildDeveloperTile() {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 8),
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withValues(alpha: 0.05),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Icon(
+                Icons.person,
+                color: Colors.blue[300],
+                size: 20,
+              ),
+              const SizedBox(width: 12),
+              const Text(
+                'Developer',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w500,
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 12),
+          const Text(
+            'Yao Amevi A. Sossou',
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+          const SizedBox(height: 8),
+          GestureDetector(
+            onTap: () => _launchLinkedIn(),
+            child: Row(
+              children: [
+                Icon(
+                  Icons.link,
+                  color: Colors.blue[300],
+                  size: 16,
+                ),
+                const SizedBox(width: 8),
+                const Text(
+                  'LinkedIn Profile',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontSize: 14,
+                    decoration: TextDecoration.underline,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Future<void> _launchLinkedIn() async {
+    final Uri url = Uri.parse('https://www.linkedin.com/in/ameviy/');
+    try {
+      if (await canLaunchUrl(url)) {
+        await launchUrl(url);
+      } else {
+        throw 'Could not launch LinkedIn profile';
+      }
+    } catch (e) {
+      // Handle error silently or show a message
+    }
+  }
+
+  Future<void> _rateApp(BuildContext context) async {
+    try {
+      final InAppReview inAppReview = InAppReview.instance;
+
+      if (await inAppReview.isAvailable()) {
+        // Show the in-app review dialog
+        await inAppReview.requestReview();
+
+        if (kDebugMode) {
+          print('✅ In-app review dialog shown');
+        }
+      } else {
+        // Fallback to opening the store
+        await inAppReview.openStoreListing(
+          appStoreId: 'your-app-store-id', // Replace with actual App Store ID
+        );
+
+        if (kDebugMode) {
+          print('✅ Opened store listing for rating');
+        }
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('❌ Error showing app rating: $e');
+      }
+
+      // Show error dialog
+      if (context.mounted) {
+        _showErrorDialog(context, 'Unable to open app rating. Please try again later.');
+      }
+    }
+  }
+
+  Future<void> _sendFeedback(BuildContext context) async {
+    try {
+      final mailtoLink = Mailto(
+        to: ['soyames@gmail.com'], // Your email address
+        subject: 'Daily Affirmations App - Feedback',
+        body: '''
+Hi Yao,
+
+I'm using the Daily Affirmations app and wanted to share some feedback:
+
+App Version: 1.2.0
+Device: ${kIsWeb ? 'Web Browser' : 'Mobile Device'}
+
+My feedback:
+[Please write your feedback here]
+
+Best regards,
+A Daily Affirmations User
+        ''',
+      );
+
+      await launchUrl(Uri.parse('$mailtoLink'));
+
+      if (kDebugMode) {
+        print('✅ Feedback email opened');
+      }
+    } catch (e) {
+      if (kDebugMode) {
+        print('❌ Error opening feedback email: $e');
+      }
+
+      // Fallback: Show feedback dialog with copy option
+      if (context.mounted) {
+        _showFeedbackDialog(context);
+      }
+    }
+  }
+
+  void _showErrorDialog(BuildContext context, String message) {
     showDialog(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: const Color(0xFF1a1a2e),
         title: const Text(
-          'Coming Soon',
+          'Error',
           style: TextStyle(color: Colors.white),
         ),
-        content: const Text(
-          'This feature will be available in a future update!',
-          style: TextStyle(color: Colors.white70),
+        content: Text(
+          message,
+          style: const TextStyle(color: Colors.white70),
         ),
         actions: [
           TextButton(
@@ -534,6 +724,78 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
   }
+
+  void _showFeedbackDialog(BuildContext context) {
+    final TextEditingController feedbackController = TextEditingController();
+
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1a1a2e),
+        title: const Text(
+          'Send Feedback',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            const Text(
+              'Share your thoughts and suggestions:',
+              style: TextStyle(color: Colors.white70),
+            ),
+            const SizedBox(height: 16),
+            TextField(
+              controller: feedbackController,
+              maxLines: 5,
+              style: const TextStyle(color: Colors.white),
+              decoration: const InputDecoration(
+                hintText: 'Type your feedback here...',
+                hintStyle: TextStyle(color: Colors.white54),
+                border: OutlineInputBorder(),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.white54),
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.blue),
+                ),
+              ),
+            ),
+            const SizedBox(height: 16),
+            const Text(
+              'Or email us directly at: soyames@gmail.com',
+              style: TextStyle(color: Colors.white54, fontSize: 12),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () {
+              // Copy feedback to clipboard and show success message
+              final feedback = feedbackController.text.trim();
+              if (feedback.isNotEmpty) {
+                // In a real app, you might want to copy to clipboard or send via another method
+                Navigator.of(context).pop();
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text('Thank you for your feedback! Please email it to soyames@gmail.com'),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              }
+            },
+            child: const Text('Send'),
+          ),
+        ],
+      ),
+    );
+  }
+
+
 
   void _showClearCacheDialog(BuildContext context, OfflineCacheNotifier notifier) {
     showDialog(

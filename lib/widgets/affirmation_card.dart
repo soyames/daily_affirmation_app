@@ -6,6 +6,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:daily_affirmation/l10n/app_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../providers/affirmation_provider.dart';
+import '../services/image_share_service.dart';
 
 class AffirmationCard extends ConsumerWidget {
   final Affirmation affirmation;
@@ -19,6 +20,28 @@ class AffirmationCard extends ConsumerWidget {
     } else {
       throw 'Could not launch $url';
     }
+  }
+
+  /// Ensures UTM parameters are added to Unsplash URLs for proper attribution
+  String _ensureUTMParameters(String url) {
+    final uri = Uri.parse(url);
+
+    // Only add UTM parameters to Unsplash URLs
+    if (!uri.host.contains('unsplash.com')) {
+      return url;
+    }
+
+    final queryParams = Map<String, String>.from(uri.queryParameters);
+
+    // Add UTM parameters if they don't exist
+    if (!queryParams.containsKey('utm_source')) {
+      queryParams['utm_source'] = 'daily_affirmation_app';
+    }
+    if (!queryParams.containsKey('utm_medium')) {
+      queryParams['utm_medium'] = 'referral';
+    }
+
+    return uri.replace(queryParameters: queryParams).toString();
   }
 
   // A helper method to get the correct localized affirmation string
@@ -245,25 +268,62 @@ class AffirmationCard extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final isFavorited = ref.watch(favoritesProvider).any((fav) => fav.affirmationIndex == affirmation.affirmationIndex);
     final String affirmationText = _getAffirmationText(context, affirmation.affirmationIndex);
 
-    return Stack(
-      children: [
-        // Background Image
-        Positioned.fill(
-          child: CachedNetworkImage(
-            imageUrl: affirmation.imageUrl,
-            fit: BoxFit.cover,
-            placeholder: (context, url) => Container(color: Colors.grey[900]),
-            errorWidget: (context, url, error) => const Icon(Icons.error),
+    return GestureDetector(
+      onTap: () {
+        final url = affirmation.photographerProfileUrl ?? 'https://unsplash.com';
+        _launchUrl(_ensureUTMParameters(url));
+      },
+      child: Stack(
+        children: [
+          // Background Image
+          Positioned.fill(
+            child: CachedNetworkImage(
+              imageUrl: affirmation.imageUrl,
+              fit: BoxFit.cover,
+              placeholder: (context, url) => Container(color: Colors.grey[900]),
+              errorWidget: (context, url, error) => const Icon(Icons.error),
+            ),
           ),
-        ),
-        // Dark overlay for text readability
-        Container(
-          color: Colors.black.withValues(alpha: 0.4),
-        ),
-        // Affirmation Text
+          // Dark overlay for text readability
+          Container(
+            color: Colors.black.withValues(alpha: 0.4),
+          ),
+          // Subtle clickable indicator
+          if (affirmation.photographerName != null)
+            Positioned(
+              top: 20,
+              right: 20,
+              child: Container(
+                padding: const EdgeInsets.all(8),
+                decoration: BoxDecoration(
+                  color: Colors.black.withValues(alpha: 0.5),
+                  borderRadius: BorderRadius.circular(20),
+                  border: Border.all(
+                    color: Colors.white.withValues(alpha: 0.3),
+                    width: 1,
+                  ),
+                ),
+                child: const Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.camera_alt,
+                      color: Colors.white70,
+                      size: 14,
+                    ),
+                    SizedBox(width: 4),
+                    Icon(
+                      Icons.open_in_new,
+                      color: Colors.white70,
+                      size: 12,
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          // Affirmation Text
         Center(
           child: Padding(
             padding: const EdgeInsets.all(24.0),
@@ -293,7 +353,8 @@ class AffirmationCard extends ConsumerWidget {
             left: 20,
             child: GestureDetector(
               onTap: () {
-                _launchUrl(affirmation.photographerProfileUrl ?? 'https://unsplash.com');
+                final url = affirmation.photographerProfileUrl ?? 'https://unsplash.com';
+                _launchUrl(_ensureUTMParameters(url));
               },
               child: RichText(
                 text: TextSpan(
@@ -320,7 +381,31 @@ class AffirmationCard extends ConsumerWidget {
               ),
             ),
           ),
-      ],
+          // Share button
+          Positioned(
+            bottom: 20,
+            right: 20,
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.black.withValues(alpha: 0.6),
+                borderRadius: BorderRadius.circular(25),
+              ),
+              child: IconButton(
+                icon: const Icon(Icons.share, color: Colors.white, size: 20),
+                onPressed: () async {
+                  final affirmationText = _getAffirmationText(context, affirmation.affirmationIndex);
+
+                  await ImageShareService.shareAffirmationAsImage(
+                    affirmation: affirmation,
+                    affirmationText: affirmationText,
+                    context: context,
+                  );
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

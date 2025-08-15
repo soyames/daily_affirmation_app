@@ -1,13 +1,16 @@
 {
-    "name": "daily_affirmation",
-    "short_name": "daily_affirmation",
-    "start_url": ".",
+    "name": "Daily Affirmations",
+    "short_name": "Affirmations",
+    "start_url": "/",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#1a1a2e",
+    "theme_color": "#1a1a2e",
+    "description": "Start your day with positivity. Get beautiful affirmations and inspiring images, automatically translated for you.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
+    "scope": "/",
+    "lang": "en",
+    "categories": ["lifestyle", "health", "wellness"],
     "icons": [
         {
             "src": "icons/Icon-192.png",

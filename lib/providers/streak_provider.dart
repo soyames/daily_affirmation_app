@@ -194,8 +194,8 @@ class StreakNotifier extends StateNotifier<StreakData> {
   }
 
   bool canGenerateNewAffirmation() {
-    // Users with 5+ day streak have unlimited affirmations
-    if (state.currentStreak >= 5) {
+    // Users with 7+ day streak have unlimited affirmations
+    if (state.currentStreak >= 7) {
       return true;
     }
 
@@ -222,7 +222,7 @@ class StreakNotifier extends StateNotifier<StreakData> {
   }
 
   int getRemainingAffirmations() {
-    if (state.currentStreak >= 5) {
+    if (state.currentStreak >= 7) {
       return -1; // Unlimited
     }
 

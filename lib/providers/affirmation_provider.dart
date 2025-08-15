@@ -91,6 +91,18 @@ class AffirmationNotifier extends StateNotifier<AsyncValue<AffirmationState>> {
   
   final Ref ref;
   static const int numberOfAffirmations = 106;
+
+  /// Adds UTM parameters to Unsplash URLs for proper attribution
+  String _addUTMParameters(String url) {
+    final uri = Uri.parse(url);
+    final queryParams = Map<String, String>.from(uri.queryParameters);
+
+    // Add UTM parameters as required by Unsplash API guidelines
+    queryParams['utm_source'] = 'daily_affirmation_app';
+    queryParams['utm_medium'] = 'referral';
+
+    return uri.replace(queryParameters: queryParams).toString();
+  }
   
   Future<void> getNewAffirmation() async {
     state = const AsyncValue.loading();
@@ -112,8 +124,12 @@ class AffirmationNotifier extends StateNotifier<AsyncValue<AffirmationState>> {
       }
 
       final randomAffirmationIndex = Random().nextInt(numberOfAffirmations) + 1;
-      
+
       final apiKey = dotenv.env['UNSPLASH_ACCESS_KEY'];
+      if (apiKey == null || apiKey.isEmpty) {
+        throw Exception('Unsplash API key not found. Please check your .env file.');
+      }
+
       final response = await http.get(Uri.parse('https://api.unsplash.com/photos/random?query=nature,landscape,abstract'),
           headers: {'Authorization': 'Client-ID $apiKey'});
 
@@ -121,7 +137,8 @@ class AffirmationNotifier extends StateNotifier<AsyncValue<AffirmationState>> {
         final Map<String, dynamic> data = json.decode(response.body);
         final imageUrl = data['urls']['regular'];
         final photographerName = data['user']['name'];
-        final photographerProfileUrl = data['user']['links']['html'];
+        final rawPhotographerProfileUrl = data['user']['links']['html'];
+        final photographerProfileUrl = _addUTMParameters(rawPhotographerProfileUrl);
         final downloadUrl = data['links']['download_location'];
 
         await http.get(Uri.parse('$downloadUrl?client_id=$apiKey'));
@@ -146,11 +163,17 @@ class AffirmationNotifier extends StateNotifier<AsyncValue<AffirmationState>> {
         // Record affirmation usage for daily limits
         ref.read(streakProvider.notifier).recordAffirmationUsage();
       } else {
-        throw Exception('Failed to load image from Unsplash. Status code: ${response.statusCode}');
+        final errorBody = response.body.isNotEmpty ? response.body : 'No error details provided';
+        throw Exception('Failed to load image from Unsplash. Status code: ${response.statusCode}. Error: $errorBody');
       }
     } catch (e, st) {
       state = AsyncValue.error(e, st);
     }
+  }
+
+  /// Force refresh the current affirmation state
+  void forceRefresh() {
+    getNewAffirmation();
   }
 }
 

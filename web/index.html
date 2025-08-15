@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
   <!--
     If you are serving your web app in a path other than the root, change the
@@ -18,21 +18,96 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Start your day with positivity. Get beautiful affirmations and inspiring images, automatically translated for you.">
 
-  <!-- iOS meta tags & icons -->
+  <!-- PWA Meta Tags -->
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="daily_affirmation">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="Daily Affirmations">
+  <meta name="application-name" content="Daily Affirmations">
+  <meta name="msapplication-TileColor" content="#1a1a2e">
+  <meta name="theme-color" content="#1a1a2e">
 
-  <!-- Favicon -->
+  <!-- Icons -->
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/Icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icons/Icon-512.png">
   <link rel="icon" type="image/png" href="favicon.png"/>
 
-  <title>daily_affirmation</title>
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Daily Affirmations">
+  <meta property="og:description" content="Start your day with positivity. Get beautiful affirmations and inspiring images.">
+  <meta property="og:image" content="icons/Icon-512.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Daily Affirmations">
+  <meta name="twitter:description" content="Start your day with positivity. Get beautiful affirmations and inspiring images.">
+
+  <title>Daily Affirmations</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- Firebase Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-XXXXXXXXXX');
+  </script>
+
+  <!-- PWA Install Prompt Enhancement -->
+  <script>
+    // Track PWA install events
+    let deferredPrompt;
+
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+      console.log('PWA install prompt available');
+    });
+
+    window.addEventListener('appinstalled', (evt) => {
+      console.log('PWA was installed');
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'pwa_installed', {
+          'event_category': 'PWA',
+          'event_label': 'Home Screen Install'
+        });
+      }
+    });
+
+    // Track display mode
+    window.addEventListener('DOMContentLoaded', () => {
+      const isStandalone = window.matchMedia('(display-mode: standalone)').matches ||
+                          window.navigator.standalone === true;
+
+      if (typeof gtag !== 'undefined') {
+        gtag('event', 'app_launch', {
+          'event_category': 'PWA',
+          'event_label': isStandalone ? 'Standalone' : 'Browser',
+          'display_mode': isStandalone ? 'standalone' : 'browser'
+        });
+      }
+    });
+  </script>
 </head>
 <body>
   <script src="flutter_bootstrap.js" async></script>
+
+  <!-- Service Worker Registration -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', function() {
+        navigator.serviceWorker.register('/sw.js')
+          .then(function(registration) {
+            console.log('ServiceWorker registration successful');
+          }, function(err) {
+            console.log('ServiceWorker registration failed: ', err);
+          });
+      });
+    }
+  </script>
 </body>
 </html>

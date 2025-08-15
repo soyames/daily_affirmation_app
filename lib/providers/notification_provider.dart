@@ -6,6 +6,7 @@ import 'package:timezone/timezone.dart' as tz;
 import 'package:timezone/data/latest.dart' as tz;
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:permission_handler/permission_handler.dart';
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:math';
 import 'dart:io';
 
@@ -261,13 +262,13 @@ class NotificationSettingsNotifier extends StateNotifier<NotificationSettings> {
     int? hour,
     int? minute,
   }) async {
-    try {
-      final newSettings = state.copyWith(
-        enabled: enabled,
-        hour: hour,
-        minute: minute,
-      );
+    final newSettings = state.copyWith(
+      enabled: enabled,
+      hour: hour,
+      minute: minute,
+    );
 
+    try {
       if (newSettings.enabled) {
         // Initialize notifications first
         await NotificationService.initialize();
@@ -275,39 +276,72 @@ class NotificationSettingsNotifier extends StateNotifier<NotificationSettings> {
         // Request permissions
         final hasPermission = await NotificationService.requestPermissions();
         if (!hasPermission) {
-          // If permission denied, keep notifications disabled
+          // If permission denied, save disabled state and return
+          await NotificationService.scheduleDaily(
+            hour: newSettings.hour,
+            minute: newSettings.minute,
+            enabled: false,
+          );
           state = newSettings.copyWith(enabled: false);
           return;
         }
       }
 
-      // Schedule or cancel notifications
+      // Schedule or cancel notifications - this also saves to SharedPreferences
       await NotificationService.scheduleDaily(
         hour: newSettings.hour,
         minute: newSettings.minute,
         enabled: newSettings.enabled,
       );
 
-      // Update state only after successful scheduling
+      // Update state after successful scheduling
       state = newSettings;
     } catch (e) {
-      // If anything fails, revert to disabled state
-      state = state.copyWith(enabled: false);
-      rethrow;
+      // If scheduling fails, still try to save the preference
+      try {
+        final prefs = await SharedPreferences.getInstance();
+        await prefs.setBool('notifications_enabled', newSettings.enabled);
+        await prefs.setString('notification_time', '${newSettings.hour}:${newSettings.minute}');
+        state = newSettings;
+      } catch (saveError) {
+        // Only revert if we can't even save preferences
+        print('Failed to save notification settings: $saveError');
+      }
     }
   }
 
   Future<void> toggleNotifications() async {
-    try {
-      await updateSettings(enabled: !state.enabled);
-    } catch (e) {
-      // If toggle fails, revert state
-      state = state.copyWith(enabled: state.enabled);
-    }
+    await updateSettings(enabled: !state.enabled);
   }
 }
 
 // Provider
 final notificationSettingsProvider = StateNotifierProvider<NotificationSettingsNotifier, NotificationSettings>((ref) {
   return NotificationSettingsNotifier();
+});
+
+// Notification prompt tracking
+class NotificationPromptNotifier extends StateNotifier<bool> {
+  NotificationPromptNotifier() : super(false) {
+    _loadPromptStatus();
+  }
+
+  static const String _promptShownKey = 'notification_prompt_shown';
+
+  Future<void> _loadPromptStatus() async {
+    final prefs = await SharedPreferences.getInstance();
+    state = prefs.getBool(_promptShownKey) ?? false;
+  }
+
+  Future<void> markPromptShown() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool(_promptShownKey, true);
+    state = true;
+  }
+
+  bool get hasBeenShown => state;
+}
+
+final notificationPromptProvider = StateNotifierProvider<NotificationPromptNotifier, bool>((ref) {
+  return NotificationPromptNotifier();
 });

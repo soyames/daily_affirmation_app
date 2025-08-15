@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:share_plus/share_plus.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../providers/affirmation_provider.dart';
+import '../services/image_share_service.dart';
 import 'package:daily_affirmation/l10n/app_localizations.dart';
 
 class FavoritesScreen extends ConsumerStatefulWidget {
@@ -245,6 +247,37 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
     }
   }
 
+  Future<void> _launchUrl(String url) async {
+    final Uri uri = Uri.parse(url);
+    if (await canLaunchUrl(uri)) {
+      await launchUrl(uri);
+    } else {
+      throw 'Could not launch $url';
+    }
+  }
+
+  /// Ensures UTM parameters are added to Unsplash URLs for proper attribution
+  String _ensureUTMParameters(String url) {
+    final uri = Uri.parse(url);
+
+    // Only add UTM parameters to Unsplash URLs
+    if (!uri.host.contains('unsplash.com')) {
+      return url;
+    }
+
+    final queryParams = Map<String, String>.from(uri.queryParameters);
+
+    // Add UTM parameters if they don't exist
+    if (!queryParams.containsKey('utm_source')) {
+      queryParams['utm_source'] = 'daily_affirmation_app';
+    }
+    if (!queryParams.containsKey('utm_medium')) {
+      queryParams['utm_medium'] = 'referral';
+    }
+
+    return uri.replace(queryParameters: queryParams).toString();
+  }
+
   @override
   Widget build(BuildContext context) {
     // Watch the new favoritesProvider
@@ -338,6 +371,41 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                           ),
                         ),
                       ),
+                      // Photo Attribution Text
+                      if (affirmation.photographerName != null)
+                        Positioned(
+                          bottom: 8,
+                          left: 8,
+                          child: GestureDetector(
+                            onTap: () {
+                              final url = affirmation.photographerProfileUrl ?? 'https://unsplash.com';
+                              _launchUrl(_ensureUTMParameters(url));
+                            },
+                            child: RichText(
+                              text: TextSpan(
+                                style: const TextStyle(color: Colors.white70, fontSize: 10),
+                                children: [
+                                  const TextSpan(text: 'Photo by '),
+                                  TextSpan(
+                                    text: affirmation.photographerName,
+                                    style: const TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const TextSpan(text: ' on '),
+                                  const TextSpan(
+                                    text: 'Unsplash',
+                                    style: TextStyle(
+                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
                       Positioned(
                         bottom: 8,
                         right: 8,
@@ -345,8 +413,12 @@ class _FavoritesScreenState extends ConsumerState<FavoritesScreen> {
                           children: [
                             IconButton(
                               icon: const Icon(Icons.share, color: Colors.white),
-                              onPressed: () {
-                                SharePlus.instance.share(ShareParams(text: '$affirmationText\n\nImage from: ${affirmation.imageUrl}'));
+                              onPressed: () async {
+                                await ImageShareService.shareAffirmationAsImage(
+                                  affirmation: affirmation,
+                                  affirmationText: affirmationText,
+                                  context: context,
+                                );
                               },
                             ),
                             IconButton(
