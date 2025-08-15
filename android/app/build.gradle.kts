@@ -34,8 +34,8 @@ android {
     }
 
     defaultConfig {
-        applicationId = "com.soyames.daily_affirmation" 
-        minSdk = 23
+        applicationId = "com.soyames.daily_affirmation"
+        minSdk = flutter.minSdkVersion
         targetSdk = flutter.targetSdkVersion
         versionCode = flutter.versionCode
         versionName = flutter.versionName
