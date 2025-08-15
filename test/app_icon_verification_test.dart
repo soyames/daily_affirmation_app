@@ -116,7 +116,7 @@ void main() {
       final fileSize = iconFile.lengthSync();
       expect(fileSize, greaterThan(1000)); // Should be at least 1KB for a valid PNG
       
-      print('✅ Custom app icon file has valid size: ${fileSize} bytes');
+      print('✅ Custom app icon file has valid size: $fileSize bytes');
     });
   });
 }

@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 
 // Localization imports
 import 'package:flutter_localizations/flutter_localizations.dart';
@@ -21,35 +19,15 @@ import 'ad_helper.dart';
 import 'widgets/favorites_screen.dart';
 import 'widgets/settings_screen.dart';
 import 'widgets/streak_widget.dart';
-import 'widgets/pwa_install_button.dart';
-import 'services/analytics_service.dart';
-import 'services/pwa_service.dart';
-import 'services/web_notification_service.dart';
+
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  // Initialize Firebase
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
-  // Initialize Analytics
-  await AnalyticsService.initialize();
 
   await dotenv.load(fileName: ".env");
   if (!kIsWeb) {
     MobileAds.instance.initialize();
     await NotificationService.initialize();
-  } else {
-    // Track web access for Firebase hosting
-    await AnalyticsService.trackWebAccess();
-
-    // Initialize PWA functionality
-    PWAService.initialize();
-
-    // Initialize web notifications
-    await WebNotificationService.initialize();
   }
 
   runApp(const ProviderScope(child: DailyAffirmationApp()));
@@ -67,9 +45,9 @@ class DailyAffirmationApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      navigatorObservers: [
-        AnalyticsService.observer,
-      ],
+      // navigatorObservers: [
+      //   AnalyticsService.observer,
+      // ],
       home: const AffirmationScreen(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
@@ -197,12 +175,7 @@ class AffirmationScreen extends ConsumerWidget {
             child: const StreakWidget(),
           ),
 
-          // PWA Install Button (only shows on web when installable)
-          const Positioned(
-            top: 100,
-            right: 16,
-            child: PWAInstallButton(),
-          ),
+
 
           Positioned(
             bottom: buttonBottomPosition, // Responsive button positioning

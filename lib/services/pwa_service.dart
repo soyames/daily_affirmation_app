@@ -2,7 +2,7 @@ import 'package:flutter/foundation.dart';
 import 'analytics_service.dart';
 
 class PWAService {
-  static bool _isInstallPromptAvailable = false;
+  static final bool _isInstallPromptAvailable = false;
 
   /// Initialize PWA functionality
   static void initialize() {

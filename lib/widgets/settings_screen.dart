@@ -204,7 +204,7 @@ class SettingsScreen extends ConsumerWidget {
           Switch(
             value: cache.isOfflineMode,
             onChanged: (_) => notifier.toggleOfflineMode(),
-            activeColor: Colors.orange,
+            activeThumbColor: Colors.orange,
           ),
         ],
       ),
@@ -351,7 +351,7 @@ class SettingsScreen extends ConsumerWidget {
                 }
               }
             },
-            activeColor: Colors.green,
+            activeThumbColor: Colors.green,
           ),
         ],
       ),
@@ -633,23 +633,27 @@ class SettingsScreen extends ConsumerWidget {
 
   Future<void> _rateApp(BuildContext context) async {
     try {
-      final InAppReview inAppReview = InAppReview.instance;
-
-      if (await inAppReview.isAvailable()) {
-        // Show the in-app review dialog
-        await inAppReview.requestReview();
-
-        if (kDebugMode) {
-          print('✅ In-app review dialog shown');
-        }
+      if (kIsWeb) {
+        // For web, show a custom rating dialog
+        _showWebRatingDialog(context);
       } else {
-        // Fallback to opening the store
-        await inAppReview.openStoreListing(
-          appStoreId: 'your-app-store-id', // Replace with actual App Store ID
-        );
+        // For mobile, use in-app review
+        final InAppReview inAppReview = InAppReview.instance;
 
-        if (kDebugMode) {
-          print('✅ Opened store listing for rating');
+        if (await inAppReview.isAvailable()) {
+          // Show the in-app review dialog
+          await inAppReview.requestReview();
+
+          if (kDebugMode) {
+            print('✅ In-app review dialog shown');
+          }
+        } else {
+          // Fallback to opening the store
+          await inAppReview.openStoreListing();
+
+          if (kDebugMode) {
+            print('✅ Opened store listing for rating');
+          }
         }
       }
     } catch (e) {
@@ -700,6 +704,126 @@ A Daily Affirmations User
         _showFeedbackDialog(context);
       }
     }
+  }
+
+  void _showWebRatingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1a1a2e),
+        title: const Text(
+          'Rate Daily Affirmations',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            const Text(
+              'How would you rate your experience with Daily Affirmations?',
+              style: TextStyle(color: Colors.white70),
+            ),
+            const SizedBox(height: 20),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: List.generate(5, (index) {
+                return IconButton(
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                    _handleWebRating(context, index + 1);
+                  },
+                  icon: Icon(
+                    Icons.star,
+                    color: Colors.amber,
+                    size: 32,
+                  ),
+                );
+              }),
+            ),
+            const SizedBox(height: 10),
+            const Text(
+              'Tap a star to rate (1-5 stars)',
+              style: TextStyle(color: Colors.white54, fontSize: 12),
+            ),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Maybe Later'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _handleWebRating(BuildContext context, int rating) {
+    if (rating >= 4) {
+      // High rating - encourage sharing or feedback
+      _showHighRatingDialog(context);
+    } else {
+      // Lower rating - ask for feedback
+      _showLowRatingDialog(context);
+    }
+  }
+
+  void _showHighRatingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1a1a2e),
+        title: const Text(
+          'Thank You! 🌟',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: const Text(
+          'We\'re so glad you\'re enjoying Daily Affirmations! Would you like to share the app with friends or send us your thoughts?',
+          style: TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('Close'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _sendFeedback(context);
+            },
+            child: const Text('Send Feedback'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  void _showLowRatingDialog(BuildContext context) {
+    showDialog(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: const Color(0xFF1a1a2e),
+        title: const Text(
+          'Help Us Improve',
+          style: TextStyle(color: Colors.white),
+        ),
+        content: const Text(
+          'We\'d love to hear how we can make Daily Affirmations better for you. Would you like to share your feedback?',
+          style: TextStyle(color: Colors.white70),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('No Thanks'),
+          ),
+          TextButton(
+            onPressed: () {
+              Navigator.of(context).pop();
+              _sendFeedback(context);
+            },
+            child: const Text('Send Feedback'),
+          ),
+        ],
+      ),
+    );
   }
 
   void _showErrorDialog(BuildContext context, String message) {
