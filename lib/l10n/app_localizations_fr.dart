@@ -9,6 +9,30 @@ class AppLocalizationsFr extends AppLocalizations {
   AppLocalizationsFr([String locale = 'fr']) : super(locale);
 
   @override
+  String get onboardingTitle1 => 'Bienvenue sur Affirmation Quotidienne !';
+
+  @override
+  String get onboardingDesc1 =>
+      'Cette application a été créée pour vous aider à développer un état d\'esprit positif et renforcer votre confiance chaque jour.';
+
+  @override
+  String get onboardingTitle2 => 'Pourquoi les affirmations ?';
+
+  @override
+  String get onboardingDesc2 =>
+      'Les affirmations sont des phrases puissantes qui peuvent reprogrammer vos pensées et vous aider à surmonter la négativité.';
+
+  @override
+  String get onboardingTitle3 => 'Comment utiliser l\'application';
+
+  @override
+  String get onboardingDesc3 =>
+      'Lisez votre affirmation du jour, réfléchissez-y et laissez-la inspirer votre journée. Sauvegardez vos favorites et programmez des rappels !';
+
+  @override
+  String get onboardingStart => 'Commencer';
+
+  @override
   String get appTitle => 'Affirmation Quotidienne';
 
   @override
@@ -383,6 +407,364 @@ class AppLocalizationsFr extends AppLocalizations {
 
   @override
   String get affirmation_106 => 'Je suis un aimant pour les bénédictions.';
+
+  @override
+  String get affirmation_107 =>
+      'Je suis ouvert à la beauté de chaque nouveau jour.';
+
+  @override
+  String get affirmation_108 =>
+      'Je suis reconnaissant pour les petits bonheurs de la vie.';
+
+  @override
+  String get affirmation_109 =>
+      'J\'apprends à me faire davantage confiance chaque jour.';
+
+  @override
+  String get affirmation_110 => 'Je mérite de réaliser mes rêves.';
+
+  @override
+  String get affirmation_111 => 'Je suis calme, centré et maître de moi.';
+
+  @override
+  String get affirmation_112 => 'Je suis entouré de possibilités infinies.';
+
+  @override
+  String get affirmation_113 =>
+      'Je suis fier des progrès que je fais chaque jour.';
+
+  @override
+  String get affirmation_114 => 'Je mérite tout le bien que la vie a à offrir.';
+
+  @override
+  String get affirmation_115 => 'Je suis une source de paix et de positivité.';
+
+  @override
+  String get affirmation_116 =>
+      'Je deviens plus fort à chaque défi que je relève.';
+
+  @override
+  String get affirmation_117 =>
+      'Je suis reconnaissant pour mes talents et dons uniques.';
+
+  @override
+  String get affirmation_118 => 'Je suis une lumière dans la vie des autres.';
+
+  @override
+  String get affirmation_119 => 'Je suis libre de créer la vie que je désire.';
+
+  @override
+  String get affirmation_120 =>
+      'Je suis patient avec moi-même et mon parcours.';
+
+  @override
+  String get affirmation_121 =>
+      'Je mérite de prendre soin de moi et de recevoir de la compassion.';
+
+  @override
+  String get affirmation_122 =>
+      'Je suis ouvert à de nouvelles aventures et expériences.';
+
+  @override
+  String get affirmation_123 =>
+      'Je suis reconnaissant pour l\'amour que je donne et reçois.';
+
+  @override
+  String get affirmation_124 => 'Je suis résilient face à l\'adversité.';
+
+  @override
+  String get affirmation_125 => 'Je suis un aimant pour le bonheur et la joie.';
+
+  @override
+  String get affirmation_126 => 'J\'apprends et je grandis chaque jour.';
+
+  @override
+  String get affirmation_127 => 'Je suis fier de la personne que je deviens.';
+
+  @override
+  String get affirmation_128 =>
+      'Je suis reconnaissant pour les leçons que la vie m\'enseigne.';
+
+  @override
+  String get affirmation_129 => 'Je suis un créateur de changements positifs.';
+
+  @override
+  String get affirmation_130 =>
+      'Je suis en paix avec l\'endroit où je suis maintenant.';
+
+  @override
+  String get affirmation_131 =>
+      'Je suis ouvert à donner et à recevoir de la gentillesse.';
+
+  @override
+  String get affirmation_132 =>
+      'Je suis reconnaissant pour mon parcours et mon histoire.';
+
+  @override
+  String get affirmation_133 =>
+      'J\'ai confiance en ma capacité à surmonter les obstacles.';
+
+  @override
+  String get affirmation_134 =>
+      'Je suis entouré de soutien et d\'encouragement.';
+
+  @override
+  String get affirmation_135 =>
+      'Je suis reconnaissant pour l\'abondance dans ma vie.';
+
+  @override
+  String get affirmation_136 =>
+      'Je suis un phare d\'espoir pour moi et pour les autres.';
+
+  @override
+  String get affirmation_137 => 'Je mérite le pardon et la compréhension.';
+
+  @override
+  String get affirmation_138 => 'Je suis reconnaissant pour le moment présent.';
+
+  @override
+  String get affirmation_139 =>
+      'Je suis ouvert à apprendre de chaque expérience.';
+
+  @override
+  String get affirmation_140 =>
+      'Je suis une source d\'inspiration et de motivation.';
+
+  @override
+  String get affirmation_141 =>
+      'Je suis reconnaissant pour ma force intérieure.';
+
+  @override
+  String get affirmation_142 =>
+      'Je suis ouvert à l\'amour sous toutes ses formes.';
+
+  @override
+  String get affirmation_143 =>
+      'Je suis reconnaissant pour les opportunités qui se présentent à moi.';
+
+  @override
+  String get affirmation_144 =>
+      'Je suis un penseur positif et un résolveur de problèmes.';
+
+  @override
+  String get affirmation_145 =>
+      'Je suis reconnaissant pour ma santé et ma vitalité.';
+
+  @override
+  String get affirmation_146 =>
+      'Je suis ouvert à de nouvelles perspectives et idées.';
+
+  @override
+  String get affirmation_147 =>
+      'Je suis reconnaissant pour la beauté qui m\'entoure.';
+
+  @override
+  String get affirmation_148 => 'Je suis une personne aimante et attentionnée.';
+
+  @override
+  String get affirmation_149 =>
+      'Je suis reconnaissant pour les amitiés dans ma vie.';
+
+  @override
+  String get affirmation_150 => 'Je suis ouvert au flux de l\'abondance.';
+
+  @override
+  String get affirmation_151 =>
+      'Je suis reconnaissant pour le cadeau d\'aujourd\'hui.';
+
+  @override
+  String get affirmation_152 => 'Je suis un individu unique et précieux.';
+
+  @override
+  String get affirmation_153 =>
+      'Je suis reconnaissant pour mon esprit créatif.';
+
+  @override
+  String get affirmation_154 => 'Je suis ouvert au changement positif.';
+
+  @override
+  String get affirmation_155 =>
+      'Je suis reconnaissant pour la paix dans mon cœur.';
+
+  @override
+  String get affirmation_156 =>
+      'Je suis une œuvre en cours, et c\'est très bien ainsi.';
+
+  @override
+  String get affirmation_157 =>
+      'Je suis reconnaissant pour le courage d\'essayer de nouvelles choses.';
+
+  @override
+  String get affirmation_158 =>
+      'Je suis ouvert à la magie des nouveaux départs.';
+
+  @override
+  String get affirmation_159 =>
+      'Je suis reconnaissant pour la sagesse que j\'acquiers chaque jour.';
+
+  @override
+  String get affirmation_160 => 'Je suis une source de joie et de rire.';
+
+  @override
+  String get affirmation_161 =>
+      'Je suis reconnaissant pour l\'amour qui remplit ma vie.';
+
+  @override
+  String get affirmation_162 => 'Je suis ouvert aux leçons de l\'univers.';
+
+  @override
+  String get affirmation_163 =>
+      'Je suis reconnaissant pour ma capacité à m\'adapter et à grandir.';
+
+  @override
+  String get affirmation_164 => 'Je crois en mon propre potentiel.';
+
+  @override
+  String get affirmation_165 =>
+      'Je suis reconnaissant pour la force de continuer.';
+
+  @override
+  String get affirmation_166 => 'Je suis ouvert aux merveilles du monde.';
+
+  @override
+  String get affirmation_167 =>
+      'Je suis reconnaissant pour le voyage de la découverte de soi.';
+
+  @override
+  String get affirmation_168 => 'Je suis un rêveur et un faiseur.';
+
+  @override
+  String get affirmation_169 =>
+      'Je suis reconnaissant pour la puissance de l\'espoir.';
+
+  @override
+  String get affirmation_170 => 'Je suis ouvert à l\'aventure de la vie.';
+
+  @override
+  String get affirmation_171 =>
+      'Je suis reconnaissant pour la beauté de la nature.';
+
+  @override
+  String get affirmation_172 => 'Je suis le champion de mon propre bonheur.';
+
+  @override
+  String get affirmation_173 =>
+      'Je suis reconnaissant pour le soutien de mes proches.';
+
+  @override
+  String get affirmation_174 => 'Je suis ouvert aux possibilités de demain.';
+
+  @override
+  String get affirmation_175 =>
+      'Je suis reconnaissant pour le don de la résilience.';
+
+  @override
+  String get affirmation_176 => 'Je suis un chercheur de vérité et de sagesse.';
+
+  @override
+  String get affirmation_177 => 'Je suis reconnaissant pour la lumière en moi.';
+
+  @override
+  String get affirmation_178 =>
+      'Je suis ouvert aux bénédictions de chaque jour.';
+
+  @override
+  String get affirmation_179 =>
+      'Je suis reconnaissant pour la chance de recommencer.';
+
+  @override
+  String get affirmation_180 =>
+      'Je suis un amoureux de la vie et de tout ce qu\'elle offre.';
+
+  @override
+  String get affirmation_181 =>
+      'Je suis reconnaissant pour la paix que je trouve dans le calme.';
+
+  @override
+  String get affirmation_182 => 'Je suis ouvert aux cadeaux du présent.';
+
+  @override
+  String get affirmation_183 =>
+      'Je suis reconnaissant pour les leçons du passé.';
+
+  @override
+  String get affirmation_184 => 'Je suis un bâtisseur de rêves.';
+
+  @override
+  String get affirmation_185 => 'Je suis reconnaissant pour la joie de donner.';
+
+  @override
+  String get affirmation_186 => 'Je suis ouvert à l\'amour qui m\'entoure.';
+
+  @override
+  String get affirmation_187 =>
+      'Je suis reconnaissant pour la beauté de mon âme.';
+
+  @override
+  String get affirmation_188 => 'Je suis le créateur de mon propre bonheur.';
+
+  @override
+  String get affirmation_189 =>
+      'Je suis reconnaissant pour la force dans mon cœur.';
+
+  @override
+  String get affirmation_190 =>
+      'Je suis ouvert à l\'aventure de l\'épanouissement personnel.';
+
+  @override
+  String get affirmation_191 =>
+      'Je suis reconnaissant pour la puissance de la gratitude.';
+
+  @override
+  String get affirmation_192 => 'Je suis une lumière dans l\'obscurité.';
+
+  @override
+  String get affirmation_193 =>
+      'Je suis reconnaissant pour le courage d\'être moi-même.';
+
+  @override
+  String get affirmation_194 => 'Je suis ouvert à la beauté du changement.';
+
+  @override
+  String get affirmation_195 =>
+      'Je suis reconnaissant pour l\'amour que je partage.';
+
+  @override
+  String get affirmation_196 => 'Je suis une source de réconfort et de soin.';
+
+  @override
+  String get affirmation_197 => 'Je suis reconnaissant pour le voyage à venir.';
+
+  @override
+  String get affirmation_198 => 'Je suis ouvert à la sagesse de mon cœur.';
+
+  @override
+  String get affirmation_199 =>
+      'Je suis reconnaissant pour la paix dans mon esprit.';
+
+  @override
+  String get affirmation_200 => 'Je crois au pouvoir des rêves.';
+
+  @override
+  String get affirmation_201 =>
+      'Je suis reconnaissant pour la beauté de chaque lever de soleil.';
+
+  @override
+  String get affirmation_202 => 'Je suis ouvert aux leçons de l\'amour.';
+
+  @override
+  String get affirmation_203 =>
+      'Je suis reconnaissant pour la force de pardonner.';
+
+  @override
+  String get affirmation_204 => 'Je suis un champion de la gentillesse.';
+
+  @override
+  String get affirmation_205 =>
+      'Je suis reconnaissant pour l\'espoir qui me guide.';
+
+  @override
+  String get affirmation_206 => 'Je suis ouvert aux miracles de la vie.';
 
   @override
   String get settings => 'Paramètres';

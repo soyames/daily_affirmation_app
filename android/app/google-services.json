@@ -1,13 +1,13 @@
 {
   "project_info": {
-    "project_number": "234010777749",
-    "project_id": "daily-affirmation-23e6b",
-    "storage_bucket": "daily-affirmation-23e6b.firebasestorage.app"
+    "project_number": "199162534919",
+    "project_id": "dailyaffirmation-9d5d6",
+    "storage_bucket": "dailyaffirmation-9d5d6.firebasestorage.app"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:234010777749:android:045b87753eb958a1b6239c",
+        "mobilesdk_app_id": "1:199162534919:android:128ba6113237bc34c3dea2",
         "android_client_info": {
           "package_name": "com.soyames.daily_affirmation"
         }
@@ -15,7 +15,7 @@
       "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyC0wF07UdHaC9YLVifACwi90XC1ED5bMdk"
+          "current_key": "AIzaSyAIZQKLgGAmqOdy-cJJ048S1vXMOJanjVA"
         }
       ],
       "services": {

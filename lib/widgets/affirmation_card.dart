@@ -290,39 +290,7 @@ class AffirmationCard extends ConsumerWidget {
           Container(
             color: Colors.black.withValues(alpha: 0.4),
           ),
-          // Subtle clickable indicator
-          if (affirmation.photographerName != null)
-            Positioned(
-              top: 20,
-              right: 20,
-              child: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: Colors.black.withValues(alpha: 0.5),
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(
-                    color: Colors.white.withValues(alpha: 0.3),
-                    width: 1,
-                  ),
-                ),
-                child: const Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Icon(
-                      Icons.camera_alt,
-                      color: Colors.white70,
-                      size: 14,
-                    ),
-                    SizedBox(width: 4),
-                    Icon(
-                      Icons.open_in_new,
-                      color: Colors.white70,
-                      size: 12,
-                    ),
-                  ],
-                ),
-              ),
-            ),
+          // Removed top-right camera/share box as requested
           // Affirmation Text
         Center(
           child: Padding(

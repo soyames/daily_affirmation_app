@@ -134,14 +134,13 @@ class NotificationService {
     );
 
     await _notifications.zonedSchedule(
-      _notificationId,
-      'Daily Affirmation 🌟',
-      _getRandomNotificationMessage(),
-      scheduledDate,
-      notificationDetails,
-      androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
-      uiLocalNotificationDateInterpretation: UILocalNotificationDateInterpretation.absoluteTime,
-      matchDateTimeComponents: DateTimeComponents.time,
+  _notificationId,
+  'Daily Affirmation 🌟',
+  _getRandomNotificationMessage(),
+  scheduledDate,
+  notificationDetails,
+  androidScheduleMode: AndroidScheduleMode.exactAllowWhileIdle,
+  matchDateTimeComponents: DateTimeComponents.time,
     );
     } catch (e) {
       // If scheduling fails, still save the settings
@@ -242,17 +241,21 @@ class NotificationSettings {
 
 // Notification settings notifier
 class NotificationSettingsNotifier extends StateNotifier<NotificationSettings> {
-  NotificationSettingsNotifier() : super(NotificationSettings(enabled: false, hour: 9, minute: 0)) {
+  NotificationSettingsNotifier() : super(NotificationSettings(enabled: true, hour: 9, minute: 0)) {
     _loadSettings();
   }
 
   Future<void> _loadSettings() async {
-    final enabled = await NotificationService.isEnabled();
+    final prefs = await SharedPreferences.getInstance();
+    bool? enabled = prefs.getBool(NotificationService._notificationEnabledKey);
+    if (enabled == null) {
+      enabled = true;
+      await prefs.setBool(NotificationService._notificationEnabledKey, true);
+    }
     final timeString = await NotificationService.getScheduledTime();
     final timeParts = timeString.split(':');
     final hour = int.tryParse(timeParts[0]) ?? 9;
     final minute = int.tryParse(timeParts[1]) ?? 0;
-
     state = NotificationSettings(enabled: enabled, hour: hour, minute: minute);
   }
 

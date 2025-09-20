@@ -1,6 +1,7 @@
 // lib/widgets/settings_screen.dart
 
 import 'package:flutter/material.dart';
+import 'ratings_widget.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:daily_affirmation/l10n/app_localizations.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -9,135 +10,17 @@ import 'package:mailto/mailto.dart';
 import 'package:flutter/foundation.dart';
 import '../providers/notification_provider.dart';
 import '../providers/offline_provider.dart';
+import '../providers/locale_provider.dart';
+
+Future<String> getNotificationDebugInfo() async {
+  final enabled = await NotificationService.isEnabled();
+  final time = await NotificationService.getScheduledTime();
+  return 'Enabled: '
+      '${enabled ? 'Yes' : 'No'}\n'
+      'Scheduled Time: $time';
+}
 
 class SettingsScreen extends ConsumerWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final notificationSettings = ref.watch(notificationSettingsProvider);
-    final notificationNotifier = ref.read(notificationSettingsProvider.notifier);
-    final offlineCache = ref.watch(offlineCacheProvider);
-    final offlineCacheNotifier = ref.read(offlineCacheProvider.notifier);
-    final localizations = AppLocalizations.of(context)!;
-
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(localizations.settings),
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-      ),
-      extendBodyBehindAppBar: true,
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [
-              Color(0xFF1a1a2e),
-              Color(0xFF16213e),
-              Color(0xFF0f3460),
-            ],
-          ),
-        ),
-        child: SafeArea(
-          child: ListView(
-            padding: const EdgeInsets.all(16.0),
-            children: [
-              const SizedBox(height: 20),
-              
-              // Notifications Section
-              _buildSectionHeader('Notifications', Icons.notifications),
-              const SizedBox(height: 16),
-              
-              _buildNotificationToggle(
-                context,
-                notificationSettings,
-                notificationNotifier,
-              ),
-              
-              if (notificationSettings.enabled) ...[
-                const SizedBox(height: 16),
-                _buildTimeSelector(
-                  context,
-                  notificationSettings,
-                  notificationNotifier,
-                ),
-                const SizedBox(height: 16),
-                _buildTestNotificationButton(context),
-              ],
-              
-              const SizedBox(height: 32),
-
-              // Offline Mode Section
-              _buildSectionHeader('Offline Mode', Icons.cloud_off),
-              const SizedBox(height: 16),
-
-              _buildOfflineModeToggle(
-                context,
-                offlineCache,
-                offlineCacheNotifier,
-              ),
-
-              if (offlineCache.cachedAffirmations.isNotEmpty) ...[
-                const SizedBox(height: 16),
-                _buildCacheInfo(offlineCache, offlineCacheNotifier),
-              ],
-
-              const SizedBox(height: 32),
-
-              // App Information Section
-              _buildSectionHeader('About', Icons.info),
-              const SizedBox(height: 16),
-              
-              _buildInfoTile(
-                'Version',
-                '1.2.0',
-                Icons.code,
-              ),
-
-              _buildInfoTile(
-                'Total Affirmations',
-                '106',
-                Icons.format_quote,
-              ),
-
-              _buildInfoTile(
-                'Languages Supported',
-                '6',
-                Icons.language,
-              ),
-
-              const SizedBox(height: 16),
-
-              // Developer Information
-              _buildDeveloperTile(),
-              
-              const SizedBox(height: 32),
-              
-              // Support Section
-              _buildSectionHeader('Support', Icons.help),
-              const SizedBox(height: 16),
-              
-              _buildActionTile(
-                'Rate the App',
-                'Help us improve by rating the app',
-                Icons.star,
-                () => _rateApp(context),
-              ),
-
-              _buildActionTile(
-                'Send Feedback',
-                'Share your thoughts and suggestions',
-                Icons.feedback,
-                () => _sendFeedback(context),
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
 
   Widget _buildSectionHeader(String title, IconData icon) {
     return Row(
@@ -156,17 +39,157 @@ class SettingsScreen extends ConsumerWidget {
     );
   }
 
-  Widget _buildOfflineModeToggle(
-    BuildContext context,
-    OfflineCache cache,
-    OfflineCacheNotifier notifier,
-  ) {
+  Widget _buildLanguageSelector(BuildContext context, Locale? locale, LocaleNotifier localeNotifier) {
+    final languages = [
+      {'label': 'System Default', 'code': null},
+      {'label': 'English', 'code': 'en'},
+      {'label': 'Français', 'code': 'fr'},
+      {'label': 'Español', 'code': 'es'},
+      {'label': 'Deutsch', 'code': 'de'},
+      {'label': 'العربية', 'code': 'ar'},
+      {'label': '中文', 'code': 'zh'},
+    ];
+    String? currentCode = locale?.languageCode;
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.1),
+        color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.2)),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.language, color: Colors.blue, size: 28),
+          const SizedBox(width: 16),
+          Expanded(
+            child: DropdownButtonHideUnderline(
+              child: DropdownButton<String?>(
+                value: currentCode,
+                dropdownColor: const Color(0xFF1a1a2e),
+                iconEnabledColor: Colors.white,
+                style: const TextStyle(color: Colors.white, fontSize: 16),
+                items: languages.map((lang) {
+                  return DropdownMenuItem<String?>(
+                    value: lang['code'],
+                    child: Text(lang['label']!),
+                  );
+                }).toList(),
+                onChanged: (code) async {
+                  if (code == null) {
+                    await localeNotifier.setLocale(null);
+                  } else {
+                    await localeNotifier.setLocale(Locale(code));
+                  }
+                },
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildNotificationToggle(BuildContext context, NotificationSettings settings, NotificationSettingsNotifier notifier) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.notifications_active, color: Colors.blue, size: 28),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Daily Reminder',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Get a daily affirmation notification',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Switch(
+            value: settings.enabled,
+            onChanged: (value) => notifier.toggleNotifications(),
+            activeColor: Colors.blue,
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildTestNotificationButton(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.blue.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.blue.withOpacity(0.3)),
+      ),
+      child: Row(
+        children: [
+          const Icon(Icons.notifications_active, color: Colors.blue, size: 28),
+          const SizedBox(width: 16),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: const [
+                Text(
+                  'Test Notification',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                SizedBox(height: 4),
+                Text(
+                  'Send a test notification now',
+                  style: TextStyle(
+                    color: Colors.white70,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => _sendTestNotification(context),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            ),
+            child: const Text('Test'),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildOfflineModeToggle(BuildContext context, OfflineCache cache, OfflineCacheNotifier notifier) {
+    return Container(
+      padding: const EdgeInsets.all(16),
+      decoration: BoxDecoration(
+        color: Colors.white.withOpacity(0.1),
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(color: Colors.white.withOpacity(0.2)),
       ),
       child: Row(
         children: [
@@ -191,8 +214,8 @@ class SettingsScreen extends ConsumerWidget {
                 const SizedBox(height: 4),
                 Text(
                   cache.isOfflineMode
-                    ? 'Using cached affirmations only'
-                    : 'Download new affirmations from internet',
+                      ? 'Using cached affirmations only'
+                      : 'Download new affirmations from internet',
                   style: const TextStyle(
                     color: Colors.white70,
                     fontSize: 14,
@@ -203,8 +226,8 @@ class SettingsScreen extends ConsumerWidget {
           ),
           Switch(
             value: cache.isOfflineMode,
-            onChanged: (_) => notifier.toggleOfflineMode(),
-            activeThumbColor: Colors.orange,
+            onChanged: (value) => notifier.toggleOfflineMode(),
+            activeColor: Colors.orange,
           ),
         ],
       ),
@@ -215,9 +238,9 @@ class SettingsScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withValues(alpha: 0.05),
+        color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withValues(alpha: 0.1)),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
       ),
       child: Column(
         children: [
@@ -262,7 +285,7 @@ class SettingsScreen extends ConsumerWidget {
           const SizedBox(height: 12),
           LinearProgressIndicator(
             value: notifier.cacheUsagePercentage / 100,
-            backgroundColor: Colors.white.withValues(alpha: 0.2),
+            backgroundColor: Colors.white.withOpacity(0.2),
             valueColor: AlwaysStoppedAnimation<Color>(
               notifier.cacheUsagePercentage > 80 ? Colors.red : Colors.blue,
             ),
@@ -271,138 +294,139 @@ class SettingsScreen extends ConsumerWidget {
       ),
     );
   }
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final notificationSettings = ref.watch(notificationSettingsProvider);
+    final notificationNotifier = ref.read(notificationSettingsProvider.notifier);
+    final offlineCache = ref.watch(offlineCacheProvider);
+    final offlineCacheNotifier = ref.read(offlineCacheProvider.notifier);
+    final localizations = AppLocalizations.of(context)!;
+    final locale = ref.watch(localeProvider);
+    final localeNotifier = ref.read(localeProvider.notifier);
 
-  Widget _buildNotificationToggle(
-    BuildContext context,
-    NotificationSettings settings,
-    NotificationSettingsNotifier notifier,
-  ) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(localizations.settings),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
       ),
-      child: Row(
-        children: [
-          Icon(
-            settings.enabled ? Icons.notifications_active : Icons.notifications_off,
-            color: settings.enabled ? Colors.green : Colors.grey,
-            size: 28,
-          ),
-          const SizedBox(width: 16),
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const Text(
-                  'Daily Reminders',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Text(
-                  settings.enabled 
-                    ? 'Get reminded to read your daily affirmation'
-                    : 'Enable notifications to get daily reminders',
-                  style: const TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Switch(
-            value: settings.enabled,
-            onChanged: (value) async {
-              // Show immediate feedback
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(
-                  content: Text(value ? 'Enabling notifications...' : 'Disabling notifications...'),
-                  duration: const Duration(seconds: 1),
-                ),
-              );
+      extendBodyBehindAppBar: true,
 
-              try {
-                await notifier.toggleNotifications();
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text(value ? 'Notifications enabled!' : 'Notifications disabled!'),
-                      duration: const Duration(seconds: 2),
-                      backgroundColor: Colors.green,
+      body: Container(
+        decoration: const BoxDecoration(
+          gradient: LinearGradient(
+            begin: Alignment.topCenter,
+            end: Alignment.bottomCenter,
+            colors: [
+              Color(0xFF1a1a2e),
+              Color(0xFF16213e),
+              Color(0xFF0f3460),
+            ],
+          ),
+        ),
+        child: SafeArea(
+          child: ListView(
+            padding: const EdgeInsets.all(16.0),
+            children: [
+              const SizedBox(height: 20),
+              // Language Selection Section
+              _buildSectionHeader('Language', Icons.language),
+              const SizedBox(height: 12),
+              _buildLanguageSelector(context, locale, localeNotifier),
+              const SizedBox(height: 32),
+
+              // Notifications Section
+              _buildSectionHeader('Notifications', Icons.notifications),
+              const SizedBox(height: 16),
+              _buildNotificationToggle(
+                context,
+                notificationSettings,
+                notificationNotifier,
+              ),
+              if (notificationSettings.enabled) ...[
+                const SizedBox(height: 16),
+                _buildTimeSelector(
+                  context,
+                  notificationSettings,
+                  notificationNotifier,
+                ),
+                const SizedBox(height: 16),
+                _buildTestNotificationButton(context),
+              ],
+              const SizedBox(height: 32),
+
+              // Offline Mode Section
+              _buildSectionHeader('Offline Mode', Icons.cloud_off),
+              const SizedBox(height: 16),
+              _buildOfflineModeToggle(
+                context,
+                offlineCache,
+                offlineCacheNotifier,
+              ),
+              if (offlineCache.cachedAffirmations.isNotEmpty) ...[
+                const SizedBox(height: 16),
+                _buildCacheInfo(offlineCache, offlineCacheNotifier),
+              ],
+              const SizedBox(height: 32),
+
+              // App Information Section
+              _buildSectionHeader('About', Icons.info),
+              const SizedBox(height: 16),
+              _buildInfoTile('Version', '1.2.0', Icons.code),
+              _buildInfoTile('Total Affirmations', '106', Icons.format_quote),
+              _buildInfoTile('Languages Supported', '6', Icons.language),
+              const SizedBox(height: 16),
+              // Developer Information
+              _buildDeveloperTile(),
+              const SizedBox(height: 32),
+
+              // Ratings Section
+              _buildSectionHeader('App Ratings', Icons.star),
+              const SizedBox(height: 12),
+              RatingsSummaryAndSubmit(),
+              const SizedBox(height: 32),
+
+              // Support Section
+              _buildSectionHeader('Support', Icons.help),
+              const SizedBox(height: 16),
+               // Remove old rate app action tile, as rating is now handled by RatingsSummaryAndSubmit
+               // _buildActionTile('Rate the App', 'Help us improve by rating the app', Icons.star, () => _rateApp(context)),
+              _buildActionTile('Send Feedback', 'Share your thoughts and suggestions', Icons.feedback, () => _sendFeedback(context)),
+
+              // Notification Debug section
+              const SizedBox(height: 32),
+              _buildSectionHeader('Notification Debug', Icons.bug_report),
+              FutureBuilder<String>(
+                future: getNotificationDebugInfo(),
+                builder: (context, snapshot) {
+                  if (!snapshot.hasData) {
+                    return Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: const CircularProgressIndicator(),
+                    );
+                  }
+                  return Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          snapshot.data!,
+                          style: const TextStyle(fontFamily: 'monospace'),
+                        ),
+                        const SizedBox(height: 8),
+                        const Text(
+                          'If notifications are not working, try disabling battery optimization for this app in your device settings. Some devices may block background tasks required for reminders.',
+                          style: TextStyle(fontSize: 13, color: Colors.orange),
+                        ),
+                      ],
                     ),
                   );
-                }
-              } catch (e) {
-                if (context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(
-                      content: Text('Failed to update notifications: $e'),
-                      duration: const Duration(seconds: 3),
-                      backgroundColor: Colors.red,
-                    ),
-                  );
-                }
-              }
-            },
-            activeThumbColor: Colors.green,
+                },
+              ),
+            ],
           ),
-        ],
-      ),
-    );
-  }
-
-  Widget _buildTestNotificationButton(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(16),
-      decoration: BoxDecoration(
-        color: Colors.blue.withValues(alpha: 0.1),
-        borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
-      ),
-      child: Row(
-        children: [
-          const Icon(Icons.notifications_active, color: Colors.blue, size: 28),
-          const SizedBox(width: 16),
-          const Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  'Test Notification',
-                  style: TextStyle(
-                    color: Colors.white,
-                    fontSize: 16,
-                    fontWeight: FontWeight.w600,
-                  ),
-                ),
-                SizedBox(height: 4),
-                Text(
-                  'Send a test notification now',
-                  style: TextStyle(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          ElevatedButton(
-            onPressed: () => _sendTestNotification(context),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.blue,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-            ),
-            child: const Text('Test'),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -415,9 +439,9 @@ class SettingsScreen extends ConsumerWidget {
     return Container(
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.1),
+        color: Colors.white.withOpacity(0.05),
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(color: Colors.white.withOpacity(0.2)),
+        border: Border.all(color: Colors.white.withOpacity(0.1)),
       ),
       child: Row(
         children: [
@@ -631,47 +655,11 @@ class SettingsScreen extends ConsumerWidget {
     }
   }
 
-  Future<void> _rateApp(BuildContext context) async {
-    try {
-      if (kIsWeb) {
-        // For web, show a custom rating dialog
-        _showWebRatingDialog(context);
-      } else {
-        // For mobile, use in-app review
-        final InAppReview inAppReview = InAppReview.instance;
-
-        if (await inAppReview.isAvailable()) {
-          // Show the in-app review dialog
-          await inAppReview.requestReview();
-
-          if (kDebugMode) {
-            print('✅ In-app review dialog shown');
-          }
-        } else {
-          // Fallback to opening the store
-          await inAppReview.openStoreListing();
-
-          if (kDebugMode) {
-            print('✅ Opened store listing for rating');
-          }
-        }
-      }
-    } catch (e) {
-      if (kDebugMode) {
-        print('❌ Error showing app rating: $e');
-      }
-
-      // Show error dialog
-      if (context.mounted) {
-        _showErrorDialog(context, 'Unable to open app rating. Please try again later.');
-      }
-    }
-  }
 
   Future<void> _sendFeedback(BuildContext context) async {
     try {
       final mailtoLink = Mailto(
-        to: ['soyames@gmail.com'], // Your email address
+        to: ['contacts@digitalconcordia.com'], // Your email address
         subject: 'Daily Affirmations App - Feedback',
         body: '''
 Hi Yao,
@@ -679,18 +667,8 @@ Hi Yao,
 I'm using the Daily Affirmations app and wanted to share some feedback:
 
 App Version: 1.2.0
-Device: ${kIsWeb ? 'Web Browser' : 'Mobile Device'}
-
-My feedback:
-[Please write your feedback here]
-
-Best regards,
-A Daily Affirmations User
-        ''',
-      );
-
-      await launchUrl(Uri.parse('$mailtoLink'));
-
+''');
+      await launchUrl(Uri.parse(mailtoLink.toString()));
       if (kDebugMode) {
         print('✅ Feedback email opened');
       }
@@ -999,3 +977,5 @@ A Daily Affirmations User
     }
   }
 }
+
+

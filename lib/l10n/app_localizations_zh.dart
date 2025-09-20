@@ -9,6 +9,30 @@ class AppLocalizationsZh extends AppLocalizations {
   AppLocalizationsZh([String locale = 'zh']) : super(locale);
 
   @override
+  String get onboardingTitle1 => 'Welcome to Daily Affirmations!';
+
+  @override
+  String get onboardingDesc1 =>
+      'This app was created to help you build a positive mindset and boost your self-confidence every day.';
+
+  @override
+  String get onboardingTitle2 => 'Why Affirmations?';
+
+  @override
+  String get onboardingDesc2 =>
+      'Affirmations are powerful statements that can rewire your thoughts and help you overcome negativity.';
+
+  @override
+  String get onboardingTitle3 => 'How to Use the App';
+
+  @override
+  String get onboardingDesc3 =>
+      'Read your daily affirmation, reflect on it, and let it inspire your day. Save your favorites and set reminders!';
+
+  @override
+  String get onboardingStart => 'Start';
+
+  @override
   String get appTitle => '每日肯定语';
 
   @override
@@ -336,6 +360,306 @@ class AppLocalizationsZh extends AppLocalizations {
 
   @override
   String get affirmation_106 => '我是祝福的磁铁。';
+
+  @override
+  String get affirmation_107 => '我愿意迎接每一天的美好。';
+
+  @override
+  String get affirmation_108 => '我感激生活中的点滴快乐。';
+
+  @override
+  String get affirmation_109 => '我每天都在学会更加信任自己。';
+
+  @override
+  String get affirmation_110 => '我值得实现自己的梦想。';
+
+  @override
+  String get affirmation_111 => '我冷静、专注且掌控自如。';
+
+  @override
+  String get affirmation_112 => '我被无限的可能性包围着。';
+
+  @override
+  String get affirmation_113 => '我为自己每天的进步感到自豪。';
+
+  @override
+  String get affirmation_114 => '我值得拥有生活中所有美好的事物。';
+
+  @override
+  String get affirmation_115 => '我是和平与正能量的源泉。';
+
+  @override
+  String get affirmation_116 => '每一次挑战都让我更加强大。';
+
+  @override
+  String get affirmation_117 => '我感激自己独特的才华和天赋。';
+
+  @override
+  String get affirmation_118 => '我是他人生命中的一束光。';
+
+  @override
+  String get affirmation_119 => '我可以自由创造自己想要的生活。';
+
+  @override
+  String get affirmation_120 => '我对自己和人生旅程充满耐心。';
+
+  @override
+  String get affirmation_121 => '我值得被关爱和善待。';
+
+  @override
+  String get affirmation_122 => '我愿意迎接新的冒险和体验。';
+
+  @override
+  String get affirmation_123 => '我感激自己给予和收到的爱。';
+
+  @override
+  String get affirmation_124 => '面对逆境我坚韧不拔。';
+
+  @override
+  String get affirmation_125 => '我是幸福和快乐的磁石。';
+
+  @override
+  String get affirmation_126 => '我每天都在学习和成长。';
+
+  @override
+  String get affirmation_127 => '我为自己正在成为的人感到自豪。';
+
+  @override
+  String get affirmation_128 => '我感激生活教给我的每一课。';
+
+  @override
+  String get affirmation_129 => '我是积极改变的创造者。';
+
+  @override
+  String get affirmation_130 => '我对当下的自己感到平和。';
+
+  @override
+  String get affirmation_131 => '我愿意给予和接受善意。';
+
+  @override
+  String get affirmation_132 => '我感激自己的人生旅程和故事。';
+
+  @override
+  String get affirmation_133 => '我相信自己有能力克服障碍。';
+
+  @override
+  String get affirmation_134 => '我被支持和鼓励包围着。';
+
+  @override
+  String get affirmation_135 => '我感激生活中的丰盛。';
+
+  @override
+  String get affirmation_136 => '我是自己和他人的希望灯塔。';
+
+  @override
+  String get affirmation_137 => '我值得被原谅和理解。';
+
+  @override
+  String get affirmation_138 => '我感激当下的每一刻。';
+
+  @override
+  String get affirmation_139 => '我愿意从每一次经历中学习。';
+
+  @override
+  String get affirmation_140 => '我是灵感和动力的源泉。';
+
+  @override
+  String get affirmation_141 => '我感激自己的内在力量。';
+
+  @override
+  String get affirmation_142 => '我愿意接受各种形式的爱。';
+
+  @override
+  String get affirmation_143 => '我感激遇到的每一个机会。';
+
+  @override
+  String get affirmation_144 => '我是积极思考者和问题解决者。';
+
+  @override
+  String get affirmation_145 => '我感激自己的健康和活力。';
+
+  @override
+  String get affirmation_146 => '我愿意接受新的观点和想法。';
+
+  @override
+  String get affirmation_147 => '我感激身边的美好。';
+
+  @override
+  String get affirmation_148 => '我是一个有爱心和关怀的人。';
+
+  @override
+  String get affirmation_149 => '我感激生活中的友谊。';
+
+  @override
+  String get affirmation_150 => '我愿意迎接丰盛的流动。';
+
+  @override
+  String get affirmation_151 => '我感激今天的馈赠。';
+
+  @override
+  String get affirmation_152 => '我是独一无二且有价值的人。';
+
+  @override
+  String get affirmation_153 => '我感激自己的创造力。';
+
+  @override
+  String get affirmation_154 => '我愿意迎接积极的改变。';
+
+  @override
+  String get affirmation_155 => '我感激内心的平静。';
+
+  @override
+  String get affirmation_156 => '我还在成长中，这没关系。';
+
+  @override
+  String get affirmation_157 => '我感激自己尝试新事物的勇气。';
+
+  @override
+  String get affirmation_158 => '我愿意迎接新开始的魔力。';
+
+  @override
+  String get affirmation_159 => '我感激每天获得的智慧。';
+
+  @override
+  String get affirmation_160 => '我是快乐和欢笑的源泉。';
+
+  @override
+  String get affirmation_161 => '我感激充满我生活的爱。';
+
+  @override
+  String get affirmation_162 => '我愿意接受宇宙的教诲。';
+
+  @override
+  String get affirmation_163 => '我感激自己适应和成长的能力。';
+
+  @override
+  String get affirmation_164 => '我相信自己的潜力。';
+
+  @override
+  String get affirmation_165 => '我感激自己坚持下去的力量。';
+
+  @override
+  String get affirmation_166 => '我愿意欣赏世界的奇迹。';
+
+  @override
+  String get affirmation_167 => '我感激自我探索的旅程。';
+
+  @override
+  String get affirmation_168 => '我是梦想家，也是实干家。';
+
+  @override
+  String get affirmation_169 => '我感激希望的力量。';
+
+  @override
+  String get affirmation_170 => '我愿意迎接人生的冒险。';
+
+  @override
+  String get affirmation_171 => '我感激大自然的美丽。';
+
+  @override
+  String get affirmation_172 => '我是自己幸福的守护者。';
+
+  @override
+  String get affirmation_173 => '我感激亲人的支持。';
+
+  @override
+  String get affirmation_174 => '我愿意迎接明天的各种可能。';
+
+  @override
+  String get affirmation_175 => '我感激坚韧不拔的天赋。';
+
+  @override
+  String get affirmation_176 => '我是追求真理和智慧的人。';
+
+  @override
+  String get affirmation_177 => '我感激内心的光芒。';
+
+  @override
+  String get affirmation_178 => '我愿意迎接每天的祝福。';
+
+  @override
+  String get affirmation_179 => '我感激重新开始的机会。';
+
+  @override
+  String get affirmation_180 => '我是热爱生活及其一切的人。';
+
+  @override
+  String get affirmation_181 => '我感激在宁静中找到的平和。';
+
+  @override
+  String get affirmation_182 => '我愿意接受当下的馈赠。';
+
+  @override
+  String get affirmation_183 => '我感激过去的教训。';
+
+  @override
+  String get affirmation_184 => '我是梦想的筑造者。';
+
+  @override
+  String get affirmation_185 => '我感激给予的快乐。';
+
+  @override
+  String get affirmation_186 => '我愿意接受身边的爱。';
+
+  @override
+  String get affirmation_187 => '我感激自己灵魂的美丽。';
+
+  @override
+  String get affirmation_188 => '我是自己幸福的创造者。';
+
+  @override
+  String get affirmation_189 => '我感激内心的力量。';
+
+  @override
+  String get affirmation_190 => '我愿意迎接自我成长的冒险。';
+
+  @override
+  String get affirmation_191 => '我感激感恩的力量。';
+
+  @override
+  String get affirmation_192 => '我是黑暗中的一束光。';
+
+  @override
+  String get affirmation_193 => '我感激做自己的勇气。';
+
+  @override
+  String get affirmation_194 => '我愿意欣赏变化的美。';
+
+  @override
+  String get affirmation_195 => '我感激自己分享的爱。';
+
+  @override
+  String get affirmation_196 => '我是安慰和关怀的源泉。';
+
+  @override
+  String get affirmation_197 => '我感激未来的旅程。';
+
+  @override
+  String get affirmation_198 => '我愿意倾听内心的智慧。';
+
+  @override
+  String get affirmation_199 => '我感激内心的安宁。';
+
+  @override
+  String get affirmation_200 => '我相信梦想的力量。';
+
+  @override
+  String get affirmation_201 => '我感激每一次日出的美丽。';
+
+  @override
+  String get affirmation_202 => '我愿意接受爱的教诲。';
+
+  @override
+  String get affirmation_203 => '我感激自己原谅的力量。';
+
+  @override
+  String get affirmation_204 => '我是善良的倡导者。';
+
+  @override
+  String get affirmation_205 => '我感激指引我的希望。';
+
+  @override
+  String get affirmation_206 => '我愿意迎接生命的奇迹。';
 
   @override
   String get settings => '设置';

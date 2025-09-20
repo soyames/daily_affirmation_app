@@ -2,7 +2,7 @@ name: daily_affirmation
 description: "Start your day with positivity. Get beautiful affirmations and inspiring images, automatically translated for you."
 publish_to: 'none'
 
-version: 1.1.0+7
+version: 1.2.0+8
 
 environment:
   sdk: ^3.5.4
@@ -25,8 +25,8 @@ dependencies:
   share_plus_platform_interface: ^6.0.0 
   cupertino_icons: ^1.0.8
   url_launcher: ^6.3.1
-  flutter_local_notifications: ^18.0.1
-  timezone: ^0.9.4
+  flutter_local_notifications: ^19.4.2
+  timezone: ^0.10.1
   permission_handler: ^11.3.1
   path_provider: ^2.1.4
   screenshot: ^3.0.0

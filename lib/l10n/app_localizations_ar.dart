@@ -9,6 +9,30 @@ class AppLocalizationsAr extends AppLocalizations {
   AppLocalizationsAr([String locale = 'ar']) : super(locale);
 
   @override
+  String get onboardingTitle1 => 'Welcome to Daily Affirmations!';
+
+  @override
+  String get onboardingDesc1 =>
+      'This app was created to help you build a positive mindset and boost your self-confidence every day.';
+
+  @override
+  String get onboardingTitle2 => 'Why Affirmations?';
+
+  @override
+  String get onboardingDesc2 =>
+      'Affirmations are powerful statements that can rewire your thoughts and help you overcome negativity.';
+
+  @override
+  String get onboardingTitle3 => 'How to Use the App';
+
+  @override
+  String get onboardingDesc3 =>
+      'Read your daily affirmation, reflect on it, and let it inspire your day. Save your favorites and set reminders!';
+
+  @override
+  String get onboardingStart => 'Start';
+
+  @override
   String get appTitle => 'تأكيدات يومية';
 
   @override
@@ -338,6 +362,307 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get affirmation_106 => 'أنا مغناطيس للبركات.';
+
+  @override
+  String get affirmation_107 => 'أنا منفتح على جمال كل يوم جديد.';
+
+  @override
+  String get affirmation_108 => 'أنا ممتن للأفراح الصغيرة في الحياة.';
+
+  @override
+  String get affirmation_109 => 'أتعلم أن أثق بنفسي أكثر كل يوم.';
+
+  @override
+  String get affirmation_110 => 'أنا أستحق تحقيق أحلامي.';
+
+  @override
+  String get affirmation_111 => 'أنا هادئ ومركز ومسيطر.';
+
+  @override
+  String get affirmation_112 => 'أنا محاط بإمكانيات لا حصر لها.';
+
+  @override
+  String get affirmation_113 => 'أنا فخور بالتقدم الذي أحرزه كل يوم.';
+
+  @override
+  String get affirmation_114 =>
+      'أنا أستحق كل الأشياء الجيدة التي تقدمها الحياة.';
+
+  @override
+  String get affirmation_115 => 'أنا مصدر للسلام والإيجابية.';
+
+  @override
+  String get affirmation_116 => 'أزداد قوة مع كل تحدٍ أواجهه.';
+
+  @override
+  String get affirmation_117 => 'أنا ممتن لمواهبي وهباتي الفريدة.';
+
+  @override
+  String get affirmation_118 => 'أنا نور في حياة الآخرين.';
+
+  @override
+  String get affirmation_119 => 'أنا حر في خلق الحياة التي أرغب بها.';
+
+  @override
+  String get affirmation_120 => 'أنا صبور مع نفسي ومع رحلتي.';
+
+  @override
+  String get affirmation_121 => 'أنا أستحق العناية الذاتية والرحمة.';
+
+  @override
+  String get affirmation_122 => 'أنا منفتح على مغامرات وتجارب جديدة.';
+
+  @override
+  String get affirmation_123 => 'أنا ممتن للحب الذي أعطيه وأتلقاه.';
+
+  @override
+  String get affirmation_124 => 'أنا مرن في مواجهة الشدائد.';
+
+  @override
+  String get affirmation_125 => 'أنا مغناطيس للسعادة والفرح.';
+
+  @override
+  String get affirmation_126 => 'أنا أتعلم وأنمو كل يوم.';
+
+  @override
+  String get affirmation_127 => 'أنا فخور بمن أصبح.';
+
+  @override
+  String get affirmation_128 => 'أنا ممتن للدروس التي تعلمني إياها الحياة.';
+
+  @override
+  String get affirmation_129 => 'أنا صانع للتغيير الإيجابي.';
+
+  @override
+  String get affirmation_130 => 'أنا في سلام مع مكاني الحالي.';
+
+  @override
+  String get affirmation_131 => 'أنا منفتح على العطاء وتلقي اللطف.';
+
+  @override
+  String get affirmation_132 => 'أنا ممتن لرحلتي وقصتي.';
+
+  @override
+  String get affirmation_133 => 'أنا واثق من قدرتي على تجاوز العقبات.';
+
+  @override
+  String get affirmation_134 => 'أنا محاط بالدعم والتشجيع.';
+
+  @override
+  String get affirmation_135 => 'أنا ممتن للوفرة في حياتي.';
+
+  @override
+  String get affirmation_136 => 'أنا منارة أمل لنفسي وللآخرين.';
+
+  @override
+  String get affirmation_137 => 'أنا أستحق المغفرة والتفهم.';
+
+  @override
+  String get affirmation_138 => 'أنا ممتن للحظة الحالية.';
+
+  @override
+  String get affirmation_139 => 'أنا منفتح على التعلم من كل تجربة.';
+
+  @override
+  String get affirmation_140 => 'أنا مصدر إلهام وتحفيز.';
+
+  @override
+  String get affirmation_141 => 'أنا ممتن لقوتي الداخلية.';
+
+  @override
+  String get affirmation_142 => 'أنا منفتح على الحب بجميع أشكاله.';
+
+  @override
+  String get affirmation_143 => 'أنا ممتن للفرص التي تأتي في طريقي.';
+
+  @override
+  String get affirmation_144 => 'أنا مفكر إيجابي وحلال للمشاكل.';
+
+  @override
+  String get affirmation_145 => 'أنا ممتن لصحتى وحيويتي.';
+
+  @override
+  String get affirmation_146 => 'أنا منفتح على وجهات نظر وأفكار جديدة.';
+
+  @override
+  String get affirmation_147 => 'أنا ممتن للجمال الذي يحيطني.';
+
+  @override
+  String get affirmation_148 => 'أنا شخص محب وحنون.';
+
+  @override
+  String get affirmation_149 => 'أنا ممتن للصداقة في حياتي.';
+
+  @override
+  String get affirmation_150 => 'أنا منفتح على تدفق الوفرة.';
+
+  @override
+  String get affirmation_151 => 'أنا ممتن لهدية اليوم.';
+
+  @override
+  String get affirmation_152 => 'أنا فرد فريد وقيم.';
+
+  @override
+  String get affirmation_153 => 'أنا ممتن لروحي الإبداعية.';
+
+  @override
+  String get affirmation_154 => 'أنا منفتح على التغيير الإيجابي.';
+
+  @override
+  String get affirmation_155 => 'أنا ممتن للسلام في قلبي.';
+
+  @override
+  String get affirmation_156 => 'أنا عمل قيد التقدم، وهذا جيد.';
+
+  @override
+  String get affirmation_157 => 'أنا ممتن للشجاعة لتجربة أشياء جديدة.';
+
+  @override
+  String get affirmation_158 => 'أنا منفتح على سحر البدايات الجديدة.';
+
+  @override
+  String get affirmation_159 => 'أنا ممتن للحكمة التي أكتسبها كل يوم.';
+
+  @override
+  String get affirmation_160 => 'أنا مصدر للفرح والضحك.';
+
+  @override
+  String get affirmation_161 => 'أنا ممتن للحب الذي يملأ حياتي.';
+
+  @override
+  String get affirmation_162 => 'أنا منفتح على دروس الكون.';
+
+  @override
+  String get affirmation_163 => 'أنا ممتن لقدرتي على التكيف والنمو.';
+
+  @override
+  String get affirmation_164 => 'أنا مؤمن بإمكانياتي الخاصة.';
+
+  @override
+  String get affirmation_165 => 'أنا ممتن للقوة للاستمرار.';
+
+  @override
+  String get affirmation_166 => 'أنا منفتح على عجائب العالم.';
+
+  @override
+  String get affirmation_167 => 'أنا ممتن لرحلة اكتشاف الذات.';
+
+  @override
+  String get affirmation_168 => 'أنا حالم ومنجز.';
+
+  @override
+  String get affirmation_169 => 'أنا ممتن لقوة الأمل.';
+
+  @override
+  String get affirmation_170 => 'أنا منفتح على مغامرة الحياة.';
+
+  @override
+  String get affirmation_171 => 'أنا ممتن لجمال الطبيعة.';
+
+  @override
+  String get affirmation_172 => 'أنا بطل سعادتي الخاصة.';
+
+  @override
+  String get affirmation_173 => 'أنا ممتن لدعم أحبائي.';
+
+  @override
+  String get affirmation_174 => 'أنا منفتح على إمكانيات الغد.';
+
+  @override
+  String get affirmation_175 => 'أنا ممتن لهبة المرونة.';
+
+  @override
+  String get affirmation_176 => 'أنا باحث عن الحقيقة والحكمة.';
+
+  @override
+  String get affirmation_177 => 'أنا ممتن للنور بداخلي.';
+
+  @override
+  String get affirmation_178 => 'أنا منفتح على بركات كل يوم.';
+
+  @override
+  String get affirmation_179 => 'أنا ممتن لفرصة البدء من جديد.';
+
+  @override
+  String get affirmation_180 => 'أنا عاشق للحياة وكل ما تقدمه.';
+
+  @override
+  String get affirmation_181 => 'أنا ممتن للسلام الذي أجده في السكون.';
+
+  @override
+  String get affirmation_182 => 'أنا منفتح على هدايا الحاضر.';
+
+  @override
+  String get affirmation_183 => 'أنا ممتن لدروس الماضي.';
+
+  @override
+  String get affirmation_184 => 'أنا باني الأحلام.';
+
+  @override
+  String get affirmation_185 => 'أنا ممتن لفرحة العطاء.';
+
+  @override
+  String get affirmation_186 => 'أنا منفتح على الحب الذي يحيطني.';
+
+  @override
+  String get affirmation_187 => 'أنا ممتن لجمال روحي.';
+
+  @override
+  String get affirmation_188 => 'أنا صانع سعادتي الخاصة.';
+
+  @override
+  String get affirmation_189 => 'أنا ممتن للقوة في قلبي.';
+
+  @override
+  String get affirmation_190 => 'أنا منفتح على مغامرة النمو الذاتي.';
+
+  @override
+  String get affirmation_191 => 'أنا ممتن لقوة الامتنان.';
+
+  @override
+  String get affirmation_192 => 'أنا نور في الظلام.';
+
+  @override
+  String get affirmation_193 => 'أنا ممتن لشجاعة أن أكون نفسي.';
+
+  @override
+  String get affirmation_194 => 'أنا منفتح على جمال التغيير.';
+
+  @override
+  String get affirmation_195 => 'أنا ممتن للحب الذي أشاركه.';
+
+  @override
+  String get affirmation_196 => 'أنا مصدر للراحة والرعاية.';
+
+  @override
+  String get affirmation_197 => 'أنا ممتن للرحلة القادمة.';
+
+  @override
+  String get affirmation_198 => 'أنا منفتح على حكمة قلبي.';
+
+  @override
+  String get affirmation_199 => 'أنا ممتن للسلام في عقلي.';
+
+  @override
+  String get affirmation_200 => 'أنا مؤمن بقوة الأحلام.';
+
+  @override
+  String get affirmation_201 => 'أنا ممتن لجمال كل شروق شمس.';
+
+  @override
+  String get affirmation_202 => 'أنا منفتح على دروس الحب.';
+
+  @override
+  String get affirmation_203 => 'أنا ممتن للقوة على التسامح.';
+
+  @override
+  String get affirmation_204 => 'أنا بطل اللطف.';
+
+  @override
+  String get affirmation_205 => 'أنا ممتن للأمل الذي يوجهني.';
+
+  @override
+  String get affirmation_206 => 'أنا منفتح على معجزات الحياة.';
 
   @override
   String get settings => 'الإعدادات';

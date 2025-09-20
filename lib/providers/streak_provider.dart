@@ -1,7 +1,10 @@
 // lib/providers/streak_provider.dart
 
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+import 'notification_provider.dart';
+
 
 class StreakData {
   final int currentStreak;
@@ -9,7 +12,9 @@ class StreakData {
   final DateTime? lastVisitDate;
   final int totalDays;
   final int dailyAffirmationsUsed;
+  final int availableAffirmations;
   final DateTime? lastAffirmationDate;
+  final DateTime? firstUseDate;
 
   StreakData({
     required this.currentStreak,
@@ -17,7 +22,9 @@ class StreakData {
     this.lastVisitDate,
     required this.totalDays,
     this.dailyAffirmationsUsed = 0,
+    this.availableAffirmations = 20,
     this.lastAffirmationDate,
+    this.firstUseDate,
   });
 
   StreakData copyWith({
@@ -26,7 +33,9 @@ class StreakData {
     DateTime? lastVisitDate,
     int? totalDays,
     int? dailyAffirmationsUsed,
+    int? availableAffirmations,
     DateTime? lastAffirmationDate,
+    DateTime? firstUseDate,
   }) {
     return StreakData(
       currentStreak: currentStreak ?? this.currentStreak,
@@ -34,7 +43,9 @@ class StreakData {
       lastVisitDate: lastVisitDate ?? this.lastVisitDate,
       totalDays: totalDays ?? this.totalDays,
       dailyAffirmationsUsed: dailyAffirmationsUsed ?? this.dailyAffirmationsUsed,
+      availableAffirmations: availableAffirmations ?? this.availableAffirmations,
       lastAffirmationDate: lastAffirmationDate ?? this.lastAffirmationDate,
+      firstUseDate: firstUseDate ?? this.firstUseDate,
     );
   }
 
@@ -45,7 +56,9 @@ class StreakData {
       'lastVisitDate': lastVisitDate?.millisecondsSinceEpoch,
       'totalDays': totalDays,
       'dailyAffirmationsUsed': dailyAffirmationsUsed,
+      'availableAffirmations': availableAffirmations,
       'lastAffirmationDate': lastAffirmationDate?.millisecondsSinceEpoch,
+      'firstUseDate': firstUseDate?.millisecondsSinceEpoch,
     };
   }
 
@@ -58,8 +71,12 @@ class StreakData {
           : null,
       totalDays: json['totalDays'] ?? 0,
       dailyAffirmationsUsed: json['dailyAffirmationsUsed'] ?? 0,
+      availableAffirmations: json['availableAffirmations'] ?? 20,
       lastAffirmationDate: json['lastAffirmationDate'] != null
           ? DateTime.fromMillisecondsSinceEpoch(json['lastAffirmationDate'])
+          : null,
+      firstUseDate: json['firstUseDate'] != null
+          ? DateTime.fromMillisecondsSinceEpoch(json['firstUseDate'])
           : null,
     );
   }
@@ -75,7 +92,6 @@ class StreakNotifier extends StateNotifier<StreakData> {
   Future<void> _loadStreak() async {
     final prefs = await SharedPreferences.getInstance();
     final streakJson = prefs.getString(_streakKey);
-    
     if (streakJson != null) {
       try {
         final Map<String, dynamic> data = {};
@@ -87,6 +103,8 @@ class StreakNotifier extends StateNotifier<StreakData> {
             final value = keyValue[1].trim();
             if (key == 'lastVisitDate' && value != 'null') {
               data[key] = int.parse(value);
+            } else if (key == 'firstUseDate' && value != 'null') {
+              data[key] = int.parse(value);
             } else if (value != 'null') {
               data[key] = int.parse(value);
             }
@@ -95,7 +113,7 @@ class StreakNotifier extends StateNotifier<StreakData> {
         state = StreakData.fromJson(data);
       } catch (e) {
         // If parsing fails, start fresh
-        state = StreakData(currentStreak: 0, longestStreak: 0, totalDays: 0, dailyAffirmationsUsed: 0);
+        state = StreakData(currentStreak: 0, longestStreak: 0, totalDays: 0, dailyAffirmationsUsed: 0, firstUseDate: null);
       }
     }
   }
@@ -110,7 +128,8 @@ class StreakNotifier extends StateNotifier<StreakData> {
   Future<void> recordVisit() async {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-    
+    int missedDays = 0;
+    bool firstVisit = false;
     if (state.lastVisitDate == null) {
       // First visit ever
       state = state.copyWith(
@@ -118,22 +137,20 @@ class StreakNotifier extends StateNotifier<StreakData> {
         longestStreak: 1,
         lastVisitDate: today,
         totalDays: 1,
+        firstUseDate: today,
       );
+      firstVisit = true;
     } else {
       final lastVisit = DateTime(
         state.lastVisitDate!.year,
         state.lastVisitDate!.month,
         state.lastVisitDate!.day,
       );
-      
-      final daysDifference = today.difference(lastVisit).inDays;
-      
-      if (daysDifference == 0) {
-        // Same day, no change needed
-        return;
-      } else if (daysDifference == 1) {
-        // Consecutive day, increment streak
-        final newStreak = state.currentStreak + 1;
+      missedDays = today.difference(lastVisit).inDays - 1;
+      int newStreak = state.currentStreak;
+      if (today.difference(lastVisit).inDays > 0) {
+        // Always increment streak by 1 for each new day, never reset
+        newStreak += 1;
         state = state.copyWith(
           currentStreak: newStreak,
           longestStreak: newStreak > state.longestStreak ? newStreak : state.longestStreak,
@@ -141,15 +158,40 @@ class StreakNotifier extends StateNotifier<StreakData> {
           totalDays: state.totalDays + 1,
         );
       } else {
-        // Streak broken, reset to 1
-        state = state.copyWith(
-          currentStreak: 1,
-          lastVisitDate: today,
-          totalDays: state.totalDays + 1,
+        // Same day, no change needed
+        return;
+      }
+      // If firstUseDate is not set, set it now (for users upgrading)
+      if (state.firstUseDate == null) {
+        state = state.copyWith(firstUseDate: today);
+      }
+    }
+    // Save missed days for display and notify
+    if (missedDays > 0) {
+      // Add missedDays * 20 to quota and notify
+      final newQuota = state.availableAffirmations + (missedDays * 20);
+      state = state.copyWith(availableAffirmations: newQuota);
+      // Send notification for quota addition
+      await NotificationService.sendImmediateNotification(
+        title: 'Affirmation Quota Added',
+        body: 'You missed $missedDays day(s). ${{missedDays * 20}} extra affirmations added to your quota!'
+      );
+    }
+    // Check for unlimited unlock (after 7 days)
+    if (state.firstUseDate != null) {
+      final daysSinceFirstUse = today.difference(DateTime(state.firstUseDate!.year, state.firstUseDate!.month, state.firstUseDate!.day)).inDays;
+      if (daysSinceFirstUse == 7) {
+        await NotificationService.sendImmediateNotification(
+          title: 'Unlimited Affirmations Unlocked!',
+          body: 'Congratulations! You can now enjoy unlimited daily affirmations.'
         );
       }
     }
-    
+    // On first visit, enable daily notification by default
+    if (firstVisit) {
+      // Schedule daily notification at 9:00 AM by default
+      await NotificationService.scheduleDaily(hour: 9, minute: 0, enabled: true);
+    }
     await _saveStreak();
   }
 
@@ -161,96 +203,87 @@ class StreakNotifier extends StateNotifier<StreakData> {
   Future<void> recordAffirmationUsage() async {
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
+    int available = state.availableAffirmations;
+    int used = state.dailyAffirmationsUsed;
 
-    // Check if it's a new day
-    if (state.lastAffirmationDate == null) {
-      // First affirmation ever
-      state = state.copyWith(
-        dailyAffirmationsUsed: 1,
-        lastAffirmationDate: today,
-      );
-    } else {
-      final lastAffirmationDay = DateTime(
-        state.lastAffirmationDate!.year,
-        state.lastAffirmationDate!.month,
-        state.lastAffirmationDate!.day,
-      );
-
-      if (today.isAtSameMomentAs(lastAffirmationDay)) {
-        // Same day, increment usage
+    // Only apply quota logic for first 7 days
+    if (state.firstUseDate != null) {
+      final daysSinceFirstUse = today.difference(DateTime(state.firstUseDate!.year, state.firstUseDate!.month, state.firstUseDate!.day)).inDays;
+      if (daysSinceFirstUse < 7) {
+        // Calculate missed days and roll over quota
+        int missedDays = 0;
+        if (state.lastAffirmationDate != null) {
+          final lastDay = DateTime(state.lastAffirmationDate!.year, state.lastAffirmationDate!.month, state.lastAffirmationDate!.day);
+          missedDays = today.difference(lastDay).inDays;
+          if (missedDays > 0) {
+            available += missedDays * 20;
+            used = 0;
+          }
+        }
+        // Use one affirmation
+        if (available > 0) {
+          available -= 1;
+          used += 1;
+        }
         state = state.copyWith(
-          dailyAffirmationsUsed: state.dailyAffirmationsUsed + 1,
+          availableAffirmations: available,
+          dailyAffirmationsUsed: used,
+          lastAffirmationDate: today,
         );
       } else {
-        // New day, reset usage
+        // After 7 days, unlimited
         state = state.copyWith(
-          dailyAffirmationsUsed: 1,
+          availableAffirmations: -1,
+          dailyAffirmationsUsed: 0,
           lastAffirmationDate: today,
         );
       }
+    } else {
+      // Fallback: treat as first use
+      state = state.copyWith(
+        availableAffirmations: 19,
+        dailyAffirmationsUsed: 1,
+        lastAffirmationDate: today,
+      );
     }
-
     await _saveStreak();
   }
 
   bool canGenerateNewAffirmation() {
-    // Users with 7+ day streak have unlimited affirmations
-    if (state.currentStreak >= 7) {
-      return true;
-    }
-
-    // Check if it's a new day (reset daily limit)
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-
-    if (state.lastAffirmationDate == null) {
-      return true; // First time user
+    if (state.firstUseDate != null) {
+      final daysSinceFirstUse = today.difference(DateTime(state.firstUseDate!.year, state.firstUseDate!.month, state.firstUseDate!.day)).inDays;
+      if (daysSinceFirstUse >= 7) {
+        return true; // Unlimited
+      }
+      return state.availableAffirmations > 0;
     }
-
-    final lastAffirmationDay = DateTime(
-      state.lastAffirmationDate!.year,
-      state.lastAffirmationDate!.month,
-      state.lastAffirmationDate!.day,
-    );
-
-    if (!today.isAtSameMomentAs(lastAffirmationDay)) {
-      return true; // New day
-    }
-
-    // Same day, check limit
-    return state.dailyAffirmationsUsed < 20;
+    // Fallback: allow if available
+    return state.availableAffirmations > 0;
   }
 
   int getRemainingAffirmations() {
-    if (state.currentStreak >= 7) {
-      return -1; // Unlimited
-    }
-
     final now = DateTime.now();
     final today = DateTime(now.year, now.month, now.day);
-
-    if (state.lastAffirmationDate == null) {
-      return 20; // First time user
+    if (state.firstUseDate != null) {
+      final daysSinceFirstUse = today.difference(DateTime(state.firstUseDate!.year, state.firstUseDate!.month, state.firstUseDate!.day)).inDays;
+      if (daysSinceFirstUse >= 7) {
+        return -1; // Unlimited
+      }
+      return state.availableAffirmations;
     }
-
-    final lastAffirmationDay = DateTime(
-      state.lastAffirmationDate!.year,
-      state.lastAffirmationDate!.month,
-      state.lastAffirmationDate!.day,
-    );
-
-    if (!today.isAtSameMomentAs(lastAffirmationDay)) {
-      return 20; // New day
-    }
-
-    return 20 - state.dailyAffirmationsUsed;
+    return state.availableAffirmations;
   }
 
-  String getStreakMessage() {
+  String getStreakMessage({int? missedDays}) {
+    final missed = missedDays ?? 0;
     if (state.currentStreak == 0) {
       return "Start your journey today! 🌟";
     } else if (state.currentStreak == 1) {
       return "Great start! Keep it up! 💪";
+    } else if (missed > 0) {
+      return "You've missed $missed day(s), but your streak continues! Current streak: ${state.currentStreak} days.";
     } else if (state.currentStreak < 7) {
       return "Building momentum! ${state.currentStreak} days strong! 🔥";
     } else if (state.currentStreak < 30) {

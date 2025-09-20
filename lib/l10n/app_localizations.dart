@@ -106,6 +106,48 @@ abstract class AppLocalizations {
     Locale('zh')
   ];
 
+  /// No description provided for @onboardingTitle1.
+  ///
+  /// In en, this message translates to:
+  /// **'Welcome to Daily Affirmations!'**
+  String get onboardingTitle1;
+
+  /// No description provided for @onboardingDesc1.
+  ///
+  /// In en, this message translates to:
+  /// **'This app was created to help you build a positive mindset and boost your self-confidence every day.'**
+  String get onboardingDesc1;
+
+  /// No description provided for @onboardingTitle2.
+  ///
+  /// In en, this message translates to:
+  /// **'Why Affirmations?'**
+  String get onboardingTitle2;
+
+  /// No description provided for @onboardingDesc2.
+  ///
+  /// In en, this message translates to:
+  /// **'Affirmations are powerful statements that can rewire your thoughts and help you overcome negativity.'**
+  String get onboardingDesc2;
+
+  /// No description provided for @onboardingTitle3.
+  ///
+  /// In en, this message translates to:
+  /// **'How to Use the App'**
+  String get onboardingTitle3;
+
+  /// No description provided for @onboardingDesc3.
+  ///
+  /// In en, this message translates to:
+  /// **'Read your daily affirmation, reflect on it, and let it inspire your day. Save your favorites and set reminders!'**
+  String get onboardingDesc3;
+
+  /// No description provided for @onboardingStart.
+  ///
+  /// In en, this message translates to:
+  /// **'Start'**
+  String get onboardingStart;
+
   /// No description provided for @appTitle.
   ///
   /// In en, this message translates to:
@@ -759,6 +801,606 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'I am a magnet for blessings.'**
   String get affirmation_106;
+
+  /// No description provided for @affirmation_107.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the beauty of each new day.'**
+  String get affirmation_107;
+
+  /// No description provided for @affirmation_108.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the small joys in life.'**
+  String get affirmation_108;
+
+  /// No description provided for @affirmation_109.
+  ///
+  /// In en, this message translates to:
+  /// **'I am learning to trust myself more each day.'**
+  String get affirmation_109;
+
+  /// No description provided for @affirmation_110.
+  ///
+  /// In en, this message translates to:
+  /// **'I am worthy of achieving my dreams.'**
+  String get affirmation_110;
+
+  /// No description provided for @affirmation_111.
+  ///
+  /// In en, this message translates to:
+  /// **'I am calm, centered, and in control.'**
+  String get affirmation_111;
+
+  /// No description provided for @affirmation_112.
+  ///
+  /// In en, this message translates to:
+  /// **'I am surrounded by endless possibilities.'**
+  String get affirmation_112;
+
+  /// No description provided for @affirmation_113.
+  ///
+  /// In en, this message translates to:
+  /// **'I am proud of the progress I make every day.'**
+  String get affirmation_113;
+
+  /// No description provided for @affirmation_114.
+  ///
+  /// In en, this message translates to:
+  /// **'I am deserving of all the good things life has to offer.'**
+  String get affirmation_114;
+
+  /// No description provided for @affirmation_115.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a source of peace and positivity.'**
+  String get affirmation_115;
+
+  /// No description provided for @affirmation_116.
+  ///
+  /// In en, this message translates to:
+  /// **'I am growing stronger with every challenge I face.'**
+  String get affirmation_116;
+
+  /// No description provided for @affirmation_117.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for my unique talents and gifts.'**
+  String get affirmation_117;
+
+  /// No description provided for @affirmation_118.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a light in the lives of others.'**
+  String get affirmation_118;
+
+  /// No description provided for @affirmation_119.
+  ///
+  /// In en, this message translates to:
+  /// **'I am free to create the life I desire.'**
+  String get affirmation_119;
+
+  /// No description provided for @affirmation_120.
+  ///
+  /// In en, this message translates to:
+  /// **'I am patient with myself and my journey.'**
+  String get affirmation_120;
+
+  /// No description provided for @affirmation_121.
+  ///
+  /// In en, this message translates to:
+  /// **'I am worthy of self-care and compassion.'**
+  String get affirmation_121;
+
+  /// No description provided for @affirmation_122.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to new adventures and experiences.'**
+  String get affirmation_122;
+
+  /// No description provided for @affirmation_123.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the love I give and receive.'**
+  String get affirmation_123;
+
+  /// No description provided for @affirmation_124.
+  ///
+  /// In en, this message translates to:
+  /// **'I am resilient in the face of adversity.'**
+  String get affirmation_124;
+
+  /// No description provided for @affirmation_125.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a magnet for happiness and joy.'**
+  String get affirmation_125;
+
+  /// No description provided for @affirmation_126.
+  ///
+  /// In en, this message translates to:
+  /// **'I am learning and growing every day.'**
+  String get affirmation_126;
+
+  /// No description provided for @affirmation_127.
+  ///
+  /// In en, this message translates to:
+  /// **'I am proud of who I am becoming.'**
+  String get affirmation_127;
+
+  /// No description provided for @affirmation_128.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the lessons life teaches me.'**
+  String get affirmation_128;
+
+  /// No description provided for @affirmation_129.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a creator of positive change.'**
+  String get affirmation_129;
+
+  /// No description provided for @affirmation_130.
+  ///
+  /// In en, this message translates to:
+  /// **'I am at peace with where I am right now.'**
+  String get affirmation_130;
+
+  /// No description provided for @affirmation_131.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to giving and receiving kindness.'**
+  String get affirmation_131;
+
+  /// No description provided for @affirmation_132.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for my journey and my story.'**
+  String get affirmation_132;
+
+  /// No description provided for @affirmation_133.
+  ///
+  /// In en, this message translates to:
+  /// **'I am confident in my ability to overcome obstacles.'**
+  String get affirmation_133;
+
+  /// No description provided for @affirmation_134.
+  ///
+  /// In en, this message translates to:
+  /// **'I am surrounded by support and encouragement.'**
+  String get affirmation_134;
+
+  /// No description provided for @affirmation_135.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the abundance in my life.'**
+  String get affirmation_135;
+
+  /// No description provided for @affirmation_136.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a beacon of hope for myself and others.'**
+  String get affirmation_136;
+
+  /// No description provided for @affirmation_137.
+  ///
+  /// In en, this message translates to:
+  /// **'I am worthy of forgiveness and understanding.'**
+  String get affirmation_137;
+
+  /// No description provided for @affirmation_138.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the present moment.'**
+  String get affirmation_138;
+
+  /// No description provided for @affirmation_139.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to learning from every experience.'**
+  String get affirmation_139;
+
+  /// No description provided for @affirmation_140.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a source of inspiration and motivation.'**
+  String get affirmation_140;
+
+  /// No description provided for @affirmation_141.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for my inner strength.'**
+  String get affirmation_141;
+
+  /// No description provided for @affirmation_142.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to love in all its forms.'**
+  String get affirmation_142;
+
+  /// No description provided for @affirmation_143.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the opportunities that come my way.'**
+  String get affirmation_143;
+
+  /// No description provided for @affirmation_144.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a positive thinker and a problem solver.'**
+  String get affirmation_144;
+
+  /// No description provided for @affirmation_145.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for my health and vitality.'**
+  String get affirmation_145;
+
+  /// No description provided for @affirmation_146.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to new perspectives and ideas.'**
+  String get affirmation_146;
+
+  /// No description provided for @affirmation_147.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the beauty that surrounds me.'**
+  String get affirmation_147;
+
+  /// No description provided for @affirmation_148.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a loving and caring person.'**
+  String get affirmation_148;
+
+  /// No description provided for @affirmation_149.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the friendships in my life.'**
+  String get affirmation_149;
+
+  /// No description provided for @affirmation_150.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the flow of abundance.'**
+  String get affirmation_150;
+
+  /// No description provided for @affirmation_151.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the gift of today.'**
+  String get affirmation_151;
+
+  /// No description provided for @affirmation_152.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a unique and valuable individual.'**
+  String get affirmation_152;
+
+  /// No description provided for @affirmation_153.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for my creative spirit.'**
+  String get affirmation_153;
+
+  /// No description provided for @affirmation_154.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to positive change.'**
+  String get affirmation_154;
+
+  /// No description provided for @affirmation_155.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the peace in my heart.'**
+  String get affirmation_155;
+
+  /// No description provided for @affirmation_156.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a work in progress, and that\'s okay.'**
+  String get affirmation_156;
+
+  /// No description provided for @affirmation_157.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the courage to try new things.'**
+  String get affirmation_157;
+
+  /// No description provided for @affirmation_158.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the magic of new beginnings.'**
+  String get affirmation_158;
+
+  /// No description provided for @affirmation_159.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the wisdom I gain each day.'**
+  String get affirmation_159;
+
+  /// No description provided for @affirmation_160.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a source of joy and laughter.'**
+  String get affirmation_160;
+
+  /// No description provided for @affirmation_161.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the love that fills my life.'**
+  String get affirmation_161;
+
+  /// No description provided for @affirmation_162.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the lessons of the universe.'**
+  String get affirmation_162;
+
+  /// No description provided for @affirmation_163.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for my ability to adapt and grow.'**
+  String get affirmation_163;
+
+  /// No description provided for @affirmation_164.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a believer in my own potential.'**
+  String get affirmation_164;
+
+  /// No description provided for @affirmation_165.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the strength to keep going.'**
+  String get affirmation_165;
+
+  /// No description provided for @affirmation_166.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the wonders of the world.'**
+  String get affirmation_166;
+
+  /// No description provided for @affirmation_167.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the journey of self-discovery.'**
+  String get affirmation_167;
+
+  /// No description provided for @affirmation_168.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a dreamer and a doer.'**
+  String get affirmation_168;
+
+  /// No description provided for @affirmation_169.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the power of hope.'**
+  String get affirmation_169;
+
+  /// No description provided for @affirmation_170.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the adventure of life.'**
+  String get affirmation_170;
+
+  /// No description provided for @affirmation_171.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the beauty of nature.'**
+  String get affirmation_171;
+
+  /// No description provided for @affirmation_172.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a champion of my own happiness.'**
+  String get affirmation_172;
+
+  /// No description provided for @affirmation_173.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the support of my loved ones.'**
+  String get affirmation_173;
+
+  /// No description provided for @affirmation_174.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the possibilities of tomorrow.'**
+  String get affirmation_174;
+
+  /// No description provided for @affirmation_175.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the gift of resilience.'**
+  String get affirmation_175;
+
+  /// No description provided for @affirmation_176.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a seeker of truth and wisdom.'**
+  String get affirmation_176;
+
+  /// No description provided for @affirmation_177.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the light within me.'**
+  String get affirmation_177;
+
+  /// No description provided for @affirmation_178.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the blessings of each day.'**
+  String get affirmation_178;
+
+  /// No description provided for @affirmation_179.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the chance to start anew.'**
+  String get affirmation_179;
+
+  /// No description provided for @affirmation_180.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a lover of life and all it offers.'**
+  String get affirmation_180;
+
+  /// No description provided for @affirmation_181.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the peace I find in stillness.'**
+  String get affirmation_181;
+
+  /// No description provided for @affirmation_182.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the gifts of the present.'**
+  String get affirmation_182;
+
+  /// No description provided for @affirmation_183.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the lessons of the past.'**
+  String get affirmation_183;
+
+  /// No description provided for @affirmation_184.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a builder of dreams.'**
+  String get affirmation_184;
+
+  /// No description provided for @affirmation_185.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the joy of giving.'**
+  String get affirmation_185;
+
+  /// No description provided for @affirmation_186.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the love that surrounds me.'**
+  String get affirmation_186;
+
+  /// No description provided for @affirmation_187.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the beauty of my soul.'**
+  String get affirmation_187;
+
+  /// No description provided for @affirmation_188.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a creator of my own happiness.'**
+  String get affirmation_188;
+
+  /// No description provided for @affirmation_189.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the strength in my heart.'**
+  String get affirmation_189;
+
+  /// No description provided for @affirmation_190.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the adventure of self-growth.'**
+  String get affirmation_190;
+
+  /// No description provided for @affirmation_191.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the power of gratitude.'**
+  String get affirmation_191;
+
+  /// No description provided for @affirmation_192.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a light in the darkness.'**
+  String get affirmation_192;
+
+  /// No description provided for @affirmation_193.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the courage to be myself.'**
+  String get affirmation_193;
+
+  /// No description provided for @affirmation_194.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the beauty of change.'**
+  String get affirmation_194;
+
+  /// No description provided for @affirmation_195.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the love I share.'**
+  String get affirmation_195;
+
+  /// No description provided for @affirmation_196.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a source of comfort and care.'**
+  String get affirmation_196;
+
+  /// No description provided for @affirmation_197.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the journey ahead.'**
+  String get affirmation_197;
+
+  /// No description provided for @affirmation_198.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the wisdom of my heart.'**
+  String get affirmation_198;
+
+  /// No description provided for @affirmation_199.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the peace in my mind.'**
+  String get affirmation_199;
+
+  /// No description provided for @affirmation_200.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a believer in the power of dreams.'**
+  String get affirmation_200;
+
+  /// No description provided for @affirmation_201.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the beauty of each sunrise.'**
+  String get affirmation_201;
+
+  /// No description provided for @affirmation_202.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the lessons of love.'**
+  String get affirmation_202;
+
+  /// No description provided for @affirmation_203.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the strength to forgive.'**
+  String get affirmation_203;
+
+  /// No description provided for @affirmation_204.
+  ///
+  /// In en, this message translates to:
+  /// **'I am a champion of kindness.'**
+  String get affirmation_204;
+
+  /// No description provided for @affirmation_205.
+  ///
+  /// In en, this message translates to:
+  /// **'I am grateful for the hope that guides me.'**
+  String get affirmation_205;
+
+  /// No description provided for @affirmation_206.
+  ///
+  /// In en, this message translates to:
+  /// **'I am open to the miracles of life.'**
+  String get affirmation_206;
 
   /// No description provided for @settings.
   ///

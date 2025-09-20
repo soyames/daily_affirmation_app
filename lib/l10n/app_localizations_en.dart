@@ -9,6 +9,30 @@ class AppLocalizationsEn extends AppLocalizations {
   AppLocalizationsEn([String locale = 'en']) : super(locale);
 
   @override
+  String get onboardingTitle1 => 'Welcome to Daily Affirmations!';
+
+  @override
+  String get onboardingDesc1 =>
+      'This app was created to help you build a positive mindset and boost your self-confidence every day.';
+
+  @override
+  String get onboardingTitle2 => 'Why Affirmations?';
+
+  @override
+  String get onboardingDesc2 =>
+      'Affirmations are powerful statements that can rewire your thoughts and help you overcome negativity.';
+
+  @override
+  String get onboardingTitle3 => 'How to Use the App';
+
+  @override
+  String get onboardingDesc3 =>
+      'Read your daily affirmation, reflect on it, and let it inspire your day. Save your favorites and set reminders!';
+
+  @override
+  String get onboardingStart => 'Start';
+
+  @override
   String get appTitle => 'Daily Affirmation';
 
   @override
@@ -359,6 +383,320 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get affirmation_106 => 'I am a magnet for blessings.';
+
+  @override
+  String get affirmation_107 => 'I am open to the beauty of each new day.';
+
+  @override
+  String get affirmation_108 => 'I am grateful for the small joys in life.';
+
+  @override
+  String get affirmation_109 => 'I am learning to trust myself more each day.';
+
+  @override
+  String get affirmation_110 => 'I am worthy of achieving my dreams.';
+
+  @override
+  String get affirmation_111 => 'I am calm, centered, and in control.';
+
+  @override
+  String get affirmation_112 => 'I am surrounded by endless possibilities.';
+
+  @override
+  String get affirmation_113 => 'I am proud of the progress I make every day.';
+
+  @override
+  String get affirmation_114 =>
+      'I am deserving of all the good things life has to offer.';
+
+  @override
+  String get affirmation_115 => 'I am a source of peace and positivity.';
+
+  @override
+  String get affirmation_116 =>
+      'I am growing stronger with every challenge I face.';
+
+  @override
+  String get affirmation_117 =>
+      'I am grateful for my unique talents and gifts.';
+
+  @override
+  String get affirmation_118 => 'I am a light in the lives of others.';
+
+  @override
+  String get affirmation_119 => 'I am free to create the life I desire.';
+
+  @override
+  String get affirmation_120 => 'I am patient with myself and my journey.';
+
+  @override
+  String get affirmation_121 => 'I am worthy of self-care and compassion.';
+
+  @override
+  String get affirmation_122 => 'I am open to new adventures and experiences.';
+
+  @override
+  String get affirmation_123 =>
+      'I am grateful for the love I give and receive.';
+
+  @override
+  String get affirmation_124 => 'I am resilient in the face of adversity.';
+
+  @override
+  String get affirmation_125 => 'I am a magnet for happiness and joy.';
+
+  @override
+  String get affirmation_126 => 'I am learning and growing every day.';
+
+  @override
+  String get affirmation_127 => 'I am proud of who I am becoming.';
+
+  @override
+  String get affirmation_128 =>
+      'I am grateful for the lessons life teaches me.';
+
+  @override
+  String get affirmation_129 => 'I am a creator of positive change.';
+
+  @override
+  String get affirmation_130 => 'I am at peace with where I am right now.';
+
+  @override
+  String get affirmation_131 => 'I am open to giving and receiving kindness.';
+
+  @override
+  String get affirmation_132 => 'I am grateful for my journey and my story.';
+
+  @override
+  String get affirmation_133 =>
+      'I am confident in my ability to overcome obstacles.';
+
+  @override
+  String get affirmation_134 => 'I am surrounded by support and encouragement.';
+
+  @override
+  String get affirmation_135 => 'I am grateful for the abundance in my life.';
+
+  @override
+  String get affirmation_136 => 'I am a beacon of hope for myself and others.';
+
+  @override
+  String get affirmation_137 => 'I am worthy of forgiveness and understanding.';
+
+  @override
+  String get affirmation_138 => 'I am grateful for the present moment.';
+
+  @override
+  String get affirmation_139 => 'I am open to learning from every experience.';
+
+  @override
+  String get affirmation_140 => 'I am a source of inspiration and motivation.';
+
+  @override
+  String get affirmation_141 => 'I am grateful for my inner strength.';
+
+  @override
+  String get affirmation_142 => 'I am open to love in all its forms.';
+
+  @override
+  String get affirmation_143 =>
+      'I am grateful for the opportunities that come my way.';
+
+  @override
+  String get affirmation_144 => 'I am a positive thinker and a problem solver.';
+
+  @override
+  String get affirmation_145 => 'I am grateful for my health and vitality.';
+
+  @override
+  String get affirmation_146 => 'I am open to new perspectives and ideas.';
+
+  @override
+  String get affirmation_147 =>
+      'I am grateful for the beauty that surrounds me.';
+
+  @override
+  String get affirmation_148 => 'I am a loving and caring person.';
+
+  @override
+  String get affirmation_149 => 'I am grateful for the friendships in my life.';
+
+  @override
+  String get affirmation_150 => 'I am open to the flow of abundance.';
+
+  @override
+  String get affirmation_151 => 'I am grateful for the gift of today.';
+
+  @override
+  String get affirmation_152 => 'I am a unique and valuable individual.';
+
+  @override
+  String get affirmation_153 => 'I am grateful for my creative spirit.';
+
+  @override
+  String get affirmation_154 => 'I am open to positive change.';
+
+  @override
+  String get affirmation_155 => 'I am grateful for the peace in my heart.';
+
+  @override
+  String get affirmation_156 => 'I am a work in progress, and that\'s okay.';
+
+  @override
+  String get affirmation_157 =>
+      'I am grateful for the courage to try new things.';
+
+  @override
+  String get affirmation_158 => 'I am open to the magic of new beginnings.';
+
+  @override
+  String get affirmation_159 => 'I am grateful for the wisdom I gain each day.';
+
+  @override
+  String get affirmation_160 => 'I am a source of joy and laughter.';
+
+  @override
+  String get affirmation_161 =>
+      'I am grateful for the love that fills my life.';
+
+  @override
+  String get affirmation_162 => 'I am open to the lessons of the universe.';
+
+  @override
+  String get affirmation_163 =>
+      'I am grateful for my ability to adapt and grow.';
+
+  @override
+  String get affirmation_164 => 'I am a believer in my own potential.';
+
+  @override
+  String get affirmation_165 => 'I am grateful for the strength to keep going.';
+
+  @override
+  String get affirmation_166 => 'I am open to the wonders of the world.';
+
+  @override
+  String get affirmation_167 =>
+      'I am grateful for the journey of self-discovery.';
+
+  @override
+  String get affirmation_168 => 'I am a dreamer and a doer.';
+
+  @override
+  String get affirmation_169 => 'I am grateful for the power of hope.';
+
+  @override
+  String get affirmation_170 => 'I am open to the adventure of life.';
+
+  @override
+  String get affirmation_171 => 'I am grateful for the beauty of nature.';
+
+  @override
+  String get affirmation_172 => 'I am a champion of my own happiness.';
+
+  @override
+  String get affirmation_173 =>
+      'I am grateful for the support of my loved ones.';
+
+  @override
+  String get affirmation_174 => 'I am open to the possibilities of tomorrow.';
+
+  @override
+  String get affirmation_175 => 'I am grateful for the gift of resilience.';
+
+  @override
+  String get affirmation_176 => 'I am a seeker of truth and wisdom.';
+
+  @override
+  String get affirmation_177 => 'I am grateful for the light within me.';
+
+  @override
+  String get affirmation_178 => 'I am open to the blessings of each day.';
+
+  @override
+  String get affirmation_179 => 'I am grateful for the chance to start anew.';
+
+  @override
+  String get affirmation_180 => 'I am a lover of life and all it offers.';
+
+  @override
+  String get affirmation_181 =>
+      'I am grateful for the peace I find in stillness.';
+
+  @override
+  String get affirmation_182 => 'I am open to the gifts of the present.';
+
+  @override
+  String get affirmation_183 => 'I am grateful for the lessons of the past.';
+
+  @override
+  String get affirmation_184 => 'I am a builder of dreams.';
+
+  @override
+  String get affirmation_185 => 'I am grateful for the joy of giving.';
+
+  @override
+  String get affirmation_186 => 'I am open to the love that surrounds me.';
+
+  @override
+  String get affirmation_187 => 'I am grateful for the beauty of my soul.';
+
+  @override
+  String get affirmation_188 => 'I am a creator of my own happiness.';
+
+  @override
+  String get affirmation_189 => 'I am grateful for the strength in my heart.';
+
+  @override
+  String get affirmation_190 => 'I am open to the adventure of self-growth.';
+
+  @override
+  String get affirmation_191 => 'I am grateful for the power of gratitude.';
+
+  @override
+  String get affirmation_192 => 'I am a light in the darkness.';
+
+  @override
+  String get affirmation_193 => 'I am grateful for the courage to be myself.';
+
+  @override
+  String get affirmation_194 => 'I am open to the beauty of change.';
+
+  @override
+  String get affirmation_195 => 'I am grateful for the love I share.';
+
+  @override
+  String get affirmation_196 => 'I am a source of comfort and care.';
+
+  @override
+  String get affirmation_197 => 'I am grateful for the journey ahead.';
+
+  @override
+  String get affirmation_198 => 'I am open to the wisdom of my heart.';
+
+  @override
+  String get affirmation_199 => 'I am grateful for the peace in my mind.';
+
+  @override
+  String get affirmation_200 => 'I am a believer in the power of dreams.';
+
+  @override
+  String get affirmation_201 => 'I am grateful for the beauty of each sunrise.';
+
+  @override
+  String get affirmation_202 => 'I am open to the lessons of love.';
+
+  @override
+  String get affirmation_203 => 'I am grateful for the strength to forgive.';
+
+  @override
+  String get affirmation_204 => 'I am a champion of kindness.';
+
+  @override
+  String get affirmation_205 => 'I am grateful for the hope that guides me.';
+
+  @override
+  String get affirmation_206 => 'I am open to the miracles of life.';
 
   @override
   String get settings => 'Settings';

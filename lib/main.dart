@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'providers/locale_provider.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:flutter/foundation.dart' show kIsWeb;
@@ -19,6 +20,8 @@ import 'ad_helper.dart';
 import 'widgets/favorites_screen.dart';
 import 'widgets/settings_screen.dart';
 import 'widgets/streak_widget.dart';
+import 'widgets/onboarding_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 
 void main() async {
@@ -33,11 +36,43 @@ void main() async {
   runApp(const ProviderScope(child: DailyAffirmationApp()));
 }
 
-class DailyAffirmationApp extends StatelessWidget {
+class DailyAffirmationApp extends ConsumerStatefulWidget {
   const DailyAffirmationApp({super.key});
 
   @override
+  ConsumerState<DailyAffirmationApp> createState() => _DailyAffirmationAppState();
+}
+
+class _DailyAffirmationAppState extends ConsumerState<DailyAffirmationApp> {
+  bool _showOnboarding = false;
+  bool _loading = true;
+
+  @override
+  void initState() {
+    super.initState();
+    _checkOnboarding();
+  }
+
+  Future<void> _checkOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    final seen = prefs.getBool('onboarding_seen') ?? false;
+    setState(() {
+      _showOnboarding = !seen;
+      _loading = false;
+    });
+  }
+
+  Future<void> _finishOnboarding() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.setBool('onboarding_seen', true);
+    setState(() {
+      _showOnboarding = false;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final locale = ref.watch(localeProvider);
     return MaterialApp(
       title: 'Daily Affirmation',
       theme: ThemeData(
@@ -45,10 +80,11 @@ class DailyAffirmationApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      // navigatorObservers: [
-      //   AnalyticsService.observer,
-      // ],
-      home: const AffirmationScreen(),
+      home: _loading
+          ? const SizedBox.shrink()
+          : _showOnboarding
+              ? OnboardingScreen(onFinish: _finishOnboarding)
+              : const AffirmationScreen(),
       localizationsDelegates: const [
         AppLocalizations.delegate,
         GlobalMaterialLocalizations.delegate,
@@ -62,6 +98,7 @@ class DailyAffirmationApp extends StatelessWidget {
         Locale('ar'), // Arabic
         Locale('zh'), // Chinese
       ],
+      locale: locale, // null = system default
     );
   }
 }
@@ -127,7 +164,7 @@ class AffirmationScreen extends ConsumerWidget {
                   IconButton(
                     icon: const Icon(Icons.settings),
                     onPressed: () {
-                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => const SettingsScreen()));
+                      Navigator.of(context).push(MaterialPageRoute(builder: (context) => SettingsScreen()));
                     },
                   ),
                   if (!notificationSettings.enabled)
@@ -427,7 +464,7 @@ class AffirmationScreen extends ConsumerWidget {
               onPressed: () {
                 Navigator.of(context).pop();
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const SettingsScreen())
+                  MaterialPageRoute(builder: (context) => SettingsScreen())
                 );
               },
               child: const Text(
