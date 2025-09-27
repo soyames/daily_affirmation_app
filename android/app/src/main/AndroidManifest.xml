@@ -26,7 +26,7 @@
             android:value="2" />
         <meta-data
             android:name="com.google.android.gms.ads.APPLICATION_ID"
-            android:value="ca-app-pub-8032708206790621~1294853414"/>
+            android:value="ca-app-pub-8032708206790621~6810718568"/>
 
         <!-- Notification receiver for boot completed -->
         <receiver android:exported="false" android:name="com.dexterous.flutterlocalnotifications.ScheduledNotificationReceiver" />
